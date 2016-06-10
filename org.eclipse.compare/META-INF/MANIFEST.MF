@@ -1,0 +1,1710 @@
+Manifest-Version: 1.0
+Bundle-SymbolicName: org.eclipse.compare; singleton:=true
+Archiver-Version: Plexus Archiver
+Built-By: e4Build
+Require-Bundle: org.eclipse.ui;bundle-version="[3.5.0,4.0.0)";resolution:=optional,
+ org.eclipse.core.resources;bundle-version="[3.4.0,4.0.0)",
+ org.eclipse.jface.text;bundle-version="[3.8.0,4.0.0)";resolution:=optional,
+ org.eclipse.ui.ide,
+ org.eclipse.ui.views;bundle-version="[3.2.0,4.0.0)";resolution:=optional,
+ org.eclipse.ui.workbench.texteditor;bundle-version="[3.5.0,4.0.0)";resolution:=optional,
+ org.eclipse.core.runtime;bundle-version="[3.2.0,4.0.0)",
+ org.eclipse.core.expressions;bundle-version="[3.2.0,4.0.0)",
+ org.eclipse.ui.editors;bundle-version="[3.5.0,4.0.0)";resolution:=optional,
+ org.eclipse.ui.forms;bundle-version="[3.2.0,4.0.0)";resolution:=optional,
+ org.eclipse.compare.core;bundle-version="[3.5.0,4.0.0)";visibility:=reexport,
+ org.eclipse.rap.ui.views;bundle-version="3.1.0",
+ org.eclipse.rap.ui.forms;bundle-version="3.1.0",
+ org.eclipse.rap.ui.workbench,
+ org.eclipse.rap.jface
+Bundle-ManifestVersion: 2
+Bundle-ActivationPolicy: lazy
+Bundle-RequiredExecutionEnvironment: JavaSE-1.8
+Eclipse-SourceReferences: scm:git:git://git.eclipse.org/gitroot/platfo
+ rm/eclipse.platform.team.git;path="bundles/org.eclipse.compare";tag="
+ I20160419-0800";commitId=a0cc0d24778652f7ab3ce880ff84fde0b082469d
+Bundle-Vendor: %providerName
+Import-Package: com.ibm.icu.util,com.ibm.icu.text
+Export-Package: org.eclipse.compare,org.eclipse.compare.contentmergevi
+ ewer,org.eclipse.compare.internal;x-internal:=true,org.eclipse.compar
+ e.internal.merge;x-internal:=true,org.eclipse.compare.internal.patch;
+ x-internal:=true,org.eclipse.compare.patch,org.eclipse.compare.struct
+ uremergeviewer
+Bundle-Name: %pluginName
+Bundle-Version: 3.6.0.v20160418-1534
+Bundle-Localization: plugin
+Bundle-Activator: org.eclipse.compare.internal.CompareUIPlugin
+Created-By: Apache Maven 3.3.3
+Build-Jdk: 1.8.0_51
+
+Name: org/eclipse/compare/contentmergeviewer/IFlushable.class
+SHA-256-Digest: CYoClhBqD2VKvyBWI0g9pALzmJG/Wv7w/nofdRaly8c=
+
+Name: org/eclipse/compare/structuremergeviewer/Differencer$Node.class
+SHA-256-Digest: T/G58GNT3eWeflpORXV/JM1Fcr8kHZT2f+Vmt3rgRHQ=
+
+Name: org/eclipse/compare/contentmergeviewer/TextMergeViewer$36.class
+SHA-256-Digest: TQvlYKBmYNJP3YDcHqkfWI0Zy/IuPna/tMNXofvBwYA=
+
+Name: org/eclipse/compare/contentmergeviewer/TextMergeViewer$LineNumbe
+ rRulerToggleAction.class
+SHA-256-Digest: 91HCrd4XEifxHXR66CsAMA95vNwrnsouK3jB8kiPClw=
+
+Name: org/eclipse/compare/contentmergeviewer/TextMergeViewer$ChildPosi
+ tionUpdater.class
+SHA-256-Digest: zk/GX1niqgJzdf0iA1PmlUvWNsuSEc4Uvm212qBd/44=
+
+Name: org/eclipse/compare/CompareEditorInput$11.class
+SHA-256-Digest: /f4gYfgO2zQsnlIq+4M9iEbx2+oNnajuciUe3GoPj10=
+
+Name: org/eclipse/compare/CompareEditorInput$3$1.class
+SHA-256-Digest: ha1rGIZjHwjS+nC0Apgkicti9iRLfqHJfnscoJCUBfs=
+
+Name: icons/full/ovr16/r_inadd_ov.gif
+SHA-256-Digest: oWspMipmGABD9xSnhF6qWpafAUZ6WMnsc2lfqRaoNp8=
+
+Name: org/eclipse/compare/internal/AddFromHistoryDialog$4.class
+SHA-256-Digest: 3kmQIXnIArFUVPr34BCiPmhpq5hKQZpfYuD+81pxU28=
+
+Name: org/eclipse/compare/internal/ComparePreferencePage.class
+SHA-256-Digest: e5SiX4KZgndGe9agLtfhxoBhZZGXzWiODNE3G7KkIPg=
+
+Name: org/eclipse/compare/ZipFileStructureCreator.class
+SHA-256-Digest: C9XMUJ7cxQoSsNtZIj0XC9fEq0hnqNaSGJFTPnFl2FU=
+
+Name: org/eclipse/compare/contentmergeviewer/TextMergeViewer$23.class
+SHA-256-Digest: 0oZz4ilj+irSk9aIuHFhOhLzO7y6IehEdNj/T2CR2nk=
+
+Name: org/eclipse/compare/internal/CompareStructureViewerSwitchingPane
+ .class
+SHA-256-Digest: /NUSzuhNnV8QRMdUOmUA9KxPVxPA9XEkx0B+VaJlVzc=
+
+Name: org/eclipse/compare/IPropertyChangeNotifier.class
+SHA-256-Digest: tuspU64MY2bDQRk9aM7sHrxPynwS1e1o8zFc8ZPDnRQ=
+
+Name: org/eclipse/compare/internal/ComparePreferencePage$4.class
+SHA-256-Digest: 1OYX5EdEfGZz1DMX95WhYIK5TiHZPQdxEohrXVc9RMQ=
+
+Name: org/eclipse/compare/structuremergeviewer/StructureDiffViewer$9.c
+ lass
+SHA-256-Digest: bvWa6FU4BLDW/9h0NMbNFePwHDTfb8ejzkMgJpbklI0=
+
+Name: org/eclipse/compare/contentmergeviewer/TextMergeViewer$InternalO
+ utlineViewerCreator.class
+SHA-256-Digest: OFtPoG0Nij0AfvKRI0uONcw/Kfntjiyi6VDo4JhBBi0=
+
+Name: org/eclipse/compare/internal/patch/HunkDiffNode.class
+SHA-256-Digest: WGzWw4UHTfd73InD8v0O/W61AlfW0KKCAOZ4ygIuxI8=
+
+Name: org/eclipse/compare/internal/CompareContentViewerSwitchingPane$5
+ .class
+SHA-256-Digest: ffraWE8fhm2EouclNSECcRwG8fLx3OeQeWSUTF92Ro8=
+
+Name: icons/full/eview16/compare_view.gif
+SHA-256-Digest: mF6EjcF8uvgRLNxH+EhHxMVpdtkwtWVLDPAixG+lFT8=
+
+Name: org/eclipse/compare/CompareEditorInput$8.class
+SHA-256-Digest: ED+cIB8LAXLTK3G9VJmvLTfcCfnm1RwHK/cM1o93UDg=
+
+Name: org/eclipse/compare/internal/ReplaceWithPreviousEditionAction.cl
+ ass
+SHA-256-Digest: XgS3EkmpqU60C4jSBgyLFouChzhSsJsJQk6Znm7SRCI=
+
+Name: icons/full/obj16/resource_obj.gif
+SHA-256-Digest: 0fTIv3MXDC2fxK9wqCl8WD0vvU6Ht7FayykZYAcBiKE=
+
+Name: org/eclipse/compare/internal/patch/PreviewPatchPage2$7.class
+SHA-256-Digest: 3ypkB1DV5CboCprJVaRslKrPaVMslhvAmRZkhTtazbM=
+
+Name: org/eclipse/compare/IContentChangeListener.class
+SHA-256-Digest: KF0NMlXLpifAqKqN2ZYyihgupWFvwpF1eGhFAr38U6o=
+
+Name: org/eclipse/compare/internal/CompareFilterDescriptor$Configurati
+ onKeysEnumeration.class
+SHA-256-Digest: olq5Vyndg6SRlwoJRa20JHVFWOHgDOC4OYxxhllgSqo=
+
+Name: org/eclipse/compare/EditionSelectionDialog$7.class
+SHA-256-Digest: lH6usAEJhYWBpHfroyhP9JP4m6qiOQm2ojQguZgVMCA=
+
+Name: icons/full/dlcl16/prev_change_nav.gif
+SHA-256-Digest: dJypkAZhxkAPc+dcyjuXRiKCYtHFOneRhC6rQ8kIQWs=
+
+Name: org/eclipse/compare/internal/patch/PreviewPatchPage2$13.class
+SHA-256-Digest: GVCyDk+rBB2+1iz6G1ujUcLU/9eWukhR3v1lxdvjcEI=
+
+Name: org/eclipse/compare/structuremergeviewer/DiffTreeViewer$3.class
+SHA-256-Digest: A4qHwyVQ3djowcRYngwBtmadjA2egiXEmpJDL7aHIW0=
+
+Name: org/eclipse/compare/internal/OverlayPreferenceStore.class
+SHA-256-Digest: ID3leSXRWjThsBhNN0ZWcXfP84nBJQIVlnbs+MguTQA=
+
+Name: org/eclipse/compare/internal/CompareWithOtherResourceDialog$Work
+ spaceContent$1.class
+SHA-256-Digest: CQ+kqm4SVqvKU3ujwn652xe3wRK0gmgtes/yXxjtfTs=
+
+Name: org/eclipse/compare/contentmergeviewer/TextMergeViewer$10.class
+SHA-256-Digest: Za/mBI4n5KZ6PqTx5VCeDxP9JAProJkEEq3VySMUfc4=
+
+Name: org/eclipse/compare/internal/CompareStructureViewerSwitchingPane
+ $3.class
+SHA-256-Digest: MbqksfJtmTOKT3LqGbQJkEzERmjmeBn7yblYu4ecYjU=
+
+Name: org/eclipse/compare/internal/OutlineViewerCreator$1.class
+SHA-256-Digest: ybV5zUkyWxwu1WyFNKICt88vFd4+0rJecCtO0SCjw0s=
+
+Name: icons/full/elcl16/copy_r_co.gif
+SHA-256-Digest: WywZtTQPIQa4vG/hRSE3n27ECBph63KD8/YE6hZPuEo=
+
+Name: org/eclipse/compare/CompareEditorInput$3.class
+SHA-256-Digest: y//EIxH+cYY+PWXfAoUb1/NYJBdT7SjMr5EadnD0Yyg=
+
+Name: org/eclipse/compare/contentmergeviewer/TextMergeViewer$31.class
+SHA-256-Digest: SPe87GBOhAUaEF6iv7SX2WZzpWg6CKACR/t23Du/GX8=
+
+Name: org/eclipse/compare/internal/CompareWithEditionAction.class
+SHA-256-Digest: Gj7SjMP1b/+NKOKn40EQAIdteXJeYyW0Iy8Bg5vghXw=
+
+Name: org/eclipse/compare/contentmergeviewer/TextMergeViewer$28.class
+SHA-256-Digest: SChR6lx2X00E7xjXyZcZsjM9ecKn8Knr95XsLMuLU4Y=
+
+Name: icons/full/ovr16/chg_ov.gif
+SHA-256-Digest: ybyVlCgqeDgW9EXaxtnZO/ZhzB/r5WEy3Bpa80XYwQs=
+
+Name: org/eclipse/compare/internal/patch/InputPatchPage$3.class
+SHA-256-Digest: yEhATdZf2Rx7IlaTvODRyDd7W2WXFcMOhyB6wrQAk6k=
+
+Name: icons/full/elcl16/next_nav.gif
+SHA-256-Digest: bjEgxNUcSOwYVXXZIPKdjF2q0lB4ETOBiG0dKVFisRI=
+
+Name: org/eclipse/compare/structuremergeviewer/DiffElement.class
+SHA-256-Digest: p53o83ff7RSjpvT3omSjqdBR+OrkWMxUoQj0aTP5mPA=
+
+Name: org/eclipse/compare/IContentChangeNotifier.class
+SHA-256-Digest: FQoTtyp/thbHysQobKi0JakcyH0FI3b99ZQLXcQtIK8=
+
+Name: org/eclipse/compare/CompareEditorInput$InternalOutlineViewerCrea
+ tor.class
+SHA-256-Digest: vQ6YseoC5MKuUs2hUKF9XqyXUmPnVPPLb8U0Bkuf7uQ=
+
+Name: org/eclipse/compare/internal/patch/InputPatchPage.class
+SHA-256-Digest: v411kIQPegmqBn5L9V/qX15uj8tNpXc9UcUUhIYtQMk=
+
+Name: org/eclipse/compare/internal/patch/RetargetPatchElementDialog$Re
+ targetPatchContentProvider.class
+SHA-256-Digest: o/G7Rz8xHoFhdaqvN12ZE9vYYKkbyGpaUwBsOzVjYC0=
+
+Name: org/eclipse/compare/internal/patch/PatchErrorDialog.class
+SHA-256-Digest: IePxFF+G9d91EvAyCV90bObLem0+LjpZ9CClVvU1RF4=
+
+Name: org/eclipse/compare/internal/BinaryCompareViewerResources.proper
+ ties
+SHA-256-Digest: kW8URcd19yk3+1NJEpadjwRQ0SEssBETlRI3dKOQ1/w=
+
+Name: org/eclipse/compare/internal/CompareWithOtherResourceDialog$Inte
+ rnalSection$1.class
+SHA-256-Digest: eLGSRv+LSYEAZQvQR5qR/XQ9UkEO95ham6NEbRRpv6g=
+
+Name: org/eclipse/compare/ICompareNavigator.class
+SHA-256-Digest: BH7Xs6JT31uFKdn8yUm2HCdJa7DYcbAmZlJGjTs/N/o=
+
+Name: org/eclipse/compare/internal/merge/MergeMessages.properties
+SHA-256-Digest: cIsBhQN9Mf+azOgaAegqPZmt6W2pxK4Hm1EzCy7S0+M=
+
+Name: org/eclipse/compare/internal/patch/PatchCompareEditorInput$3.cla
+ ss
+SHA-256-Digest: yEhWqLuc7eCFbXh3hW2Vl26bxelXSyKLapTED4kBkxM=
+
+Name: org/eclipse/compare/EditionSelectionDialog$2.class
+SHA-256-Digest: PXiPBZGYKHHL66/Swh/2f/sVrX6xKClYUQZxpkEmpgE=
+
+Name: org/eclipse/compare/contentmergeviewer/TextMergeViewer$InternalO
+ utlineViewerCreator$1.class
+SHA-256-Digest: j7bs0SjANGEl7auLvOF/fZ8l7Krm5cpZO6tHEMsc2+M=
+
+Name: org/eclipse/compare/contentmergeviewer/TextMergeViewer$15.class
+SHA-256-Digest: I0W2wYfTrUCRgFjKP12uoqsIhyyfDdQg3Dj1dBduUXQ=
+
+Name: org/eclipse/compare/ITypedElement.class
+SHA-256-Digest: n/sj++mJRl7wjAvac0lQXIS4p8vedLqXaGP8VOgiE9A=
+
+Name: org/eclipse/compare/structuremergeviewer/StructureDiffViewer$Str
+ uctureInfo.class
+SHA-256-Digest: Ghg5k4mJcAqP5ZDvZQAp1rxstl62Y9LyTGyZo1K+8ic=
+
+Name: org/eclipse/compare/contentmergeviewer/ContentMergeViewer$7.clas
+ s
+SHA-256-Digest: QOnb0C+gNY4gtPASSc4ltBvLEfVm214rUeyBpGdOp0g=
+
+Name: org/eclipse/compare/internal/CompareUIPlugin$CompareRegistry.cla
+ ss
+SHA-256-Digest: 81tKBCCn24CkJaLJUsgCkLsz1pYD4C7GpA6/3QAKcts=
+
+Name: org/eclipse/compare/internal/patch/InputPatchPage$8.class
+SHA-256-Digest: Qysor6ktf+9mikdBh9B6x1YxhiMMATqH1dy09ppeVqk=
+
+Name: org/eclipse/compare/internal/CompareStructureViewerSwitchingPane
+ $1.class
+SHA-256-Digest: VIksMxVVJwBll2cPeeM8zzshNqHqwubFvcNKGwJOMdY=
+
+Name: org/eclipse/compare/CompareEditorInput$1.class
+SHA-256-Digest: AwUxITREhHMMVQC1G06ELehLQ1zlAq9dUE3DJ9A6EgM=
+
+Name: org/eclipse/compare/IEditableContentExtension.class
+SHA-256-Digest: Txbw8h4SOMJ5pF8k8mL7CaPBXFWX0x6rGPf8+SZKUeI=
+
+Name: org/eclipse/compare/internal/patch/PatchTargetPage$1.class
+SHA-256-Digest: DfUN2Hk7OpiAiGa2hDMwYVBzXls9oxWO9aclvQE86Ec=
+
+Name: icons/full/dlcl16/next_change_nav.gif
+SHA-256-Digest: U9a2wTwKm24WNbOESAnHYib8VeWqg2Ppd+RLtCWXalA=
+
+Name: org/eclipse/compare/internal/ResourceCompareInput$1$1.class
+SHA-256-Digest: 2RjpsEVT/b6oYNwS200XU+CEbM9WbnBUWna0t8a6RnY=
+
+Name: org/eclipse/compare/internal/patch/InputPatchPage$5.class
+SHA-256-Digest: mAjLsL5hiIjqeQlVe5yhQhRF+YpsAuY2WEUE5URVBGE=
+
+Name: org/eclipse/compare/internal/IMergeViewerTestAdapter.class
+SHA-256-Digest: u08gJgumpHubZ/lL617DXRiwKPpKsiMDQekKwqyxuVQ=
+
+Name: org/eclipse/compare/structuremergeviewer/StructureCreator.class
+SHA-256-Digest: /vtDSkFpD8rIwEoWN6dBqvMBacdYrt+TH8Wex8bVlpI=
+
+Name: icons/full/elcl16/prev_diff_nav.gif
+SHA-256-Digest: fHBW7He81ot3qnYxhIhKDqUP+u+v63KWAyznk9n6hSY=
+
+Name: org/eclipse/compare/internal/CompareStructureViewerSwitchingPane
+ $4$1.class
+SHA-256-Digest: cnC9fPmQA63yAIEEQR3l0E4MFZck0rzUFGonVlzqET0=
+
+Name: org/eclipse/compare/internal/CompareWithOtherResourceHandler.cla
+ ss
+SHA-256-Digest: XlJAv+VJZAjPnWlZwQPslCXcAtqM0uEKsLDduXAEo40=
+
+Name: org/eclipse/compare/internal/CompareWithOtherResourceAction.clas
+ s
+SHA-256-Digest: WNXNVu9iCo90V7IGG7fY+X2+kVhKSPajEdYPV9LTIhw=
+
+Name: org/eclipse/compare/internal/CompareOutlinePage.class
+SHA-256-Digest: qBiNSf0wAhuCZivxBbB9aBtnn3M/jcOx0U+n+rPtOKI=
+
+Name: org/eclipse/compare/internal/patch/PatchCompareEditorInput$1.cla
+ ss
+SHA-256-Digest: Ii4dxWGx2nLuNfSIV4wgxTy28j/HP0Dt2nNyuey40kM=
+
+Name: org/eclipse/compare/internal/patch/PatchTargetPage.class
+SHA-256-Digest: 8rlX9KYt20zfCsd9iU756DIL7VScoy+8lRTHx4kZIgo=
+
+Name: org/eclipse/compare/internal/AddFromHistoryAction.properties
+SHA-256-Digest: u8Q/TynfQHT/U7eXqwhLlWYVTQiIh6G6E4sUTHiM8fY=
+
+Name: org/eclipse/compare/internal/TabFolderLayout.class
+SHA-256-Digest: yQx8lYbuvBCVH9zk8LxKJdFJtuQA4Y7Y8QUA90vTQpk=
+
+Name: icons/full/dlcl16/copy_l_co.gif
+SHA-256-Digest: jSEWcLTMU+wfrriqR6Ix/JCG/DaEqGXSg7ypQ+xNCZA=
+
+Name: icons/full/ovr16/removed_ov.gif
+SHA-256-Digest: akjk/9sUmXmC4IeWdO6lxu6dZHS6D1bCrpT6Viyj/Zs=
+
+Name: org/eclipse/compare/internal/CompareContentViewerSwitchingPane$7
+ .class
+SHA-256-Digest: 7s69MP8LFe+DtWFAdGS/QxrUso2saz5z5AlthkgMP7o=
+
+Name: org/eclipse/compare/EditionSelectionDialog$4.class
+SHA-256-Digest: nSxE4BYNBrtJRi146r0paAl1OIhGS0d32bCCKsh6ZU8=
+
+Name: org/eclipse/compare/CompareEditorInput$13.class
+SHA-256-Digest: o+/JV5D3XPNFmtkyPNO/zBgmrIfxT/q8b4cVtyeHP4g=
+
+Name: org/eclipse/compare/internal/ResourceCompareInput.class
+SHA-256-Digest: PsBTz4UC17dyl/SBt5v8A5lo05995S7ktgm/GYV5GFc=
+
+Name: org/eclipse/compare/internal/DocLineComparator.class
+SHA-256-Digest: bd29ZkQtzolq5rizdafMxPHpmQi80Q6U3kIEGPBX9b0=
+
+Name: org/eclipse/compare/structuremergeviewer/IStructureComparator.cl
+ ass
+SHA-256-Digest: L37JP+FUnkSQuu9SgKWIjUrlM/SWjppguII2aH3Jmx4=
+
+Name: org/eclipse/compare/internal/AddFromHistoryDialog.class
+SHA-256-Digest: vLjLCl7k+LSjxXwdNvCJyWG5PGZctRCOqpFYC/BnmU8=
+
+Name: org/eclipse/compare/contentmergeviewer/TextMergeViewer$34.class
+SHA-256-Digest: 4dHOL+wWd+QZNTmIcJvUAkDGZaEkkn/+qtTXwqWnS7s=
+
+Name: org/eclipse/compare/contentmergeviewer/TextMergeViewer.class
+SHA-256-Digest: Vt2hZuUitpOEjXBX4YCtLk8aCCh7Jq6T0X0lKKwfgVw=
+
+Name: org/eclipse/compare/internal/CompareUIPlugin$1.class
+SHA-256-Digest: hdZzgOsh/uDDsikV5wfTG58nA4Gd/M8RLwSWHIiUCnE=
+
+Name: org/eclipse/compare/EditionSelectionDialog$5.class
+SHA-256-Digest: DHh3ESLnJKD7ohNpmkozCNCJn3YYf++gV8lZ6Qgcv/4=
+
+Name: org/eclipse/compare/patch/ApplyPatchOperation$1.class
+SHA-256-Digest: td9jYgzER6AviarpZvV6uw7AW2OLysSPB2BiIhST8jQ=
+
+Name: org/eclipse/compare/internal/patch/PatchWizard$1.class
+SHA-256-Digest: 8bucZseA2dRUVALw4xZjKs3s98Zat00XEN+sl48q8mU=
+
+Name: org/eclipse/compare/internal/merge/LineComparator.class
+SHA-256-Digest: d85rNSkDd2VGLnwmkWxZKaz5oixwOAtttF5ELMf9VQs=
+
+Name: org/eclipse/compare/internal/CompareWithOtherResourceDialog$Cont
+ entTypeElement.class
+SHA-256-Digest: 0dIqQU73yVKmMBGFV8OpP0BARPJ9AfJ2Sn9zplrpLVM=
+
+Name: org/eclipse/compare/contentmergeviewer/TextMergeViewer$12.class
+SHA-256-Digest: b5sLbPIspjPSTN+kgZNFkgvc5WNZGzqjUZlhYwPOuxU=
+
+Name: org/eclipse/compare/IStreamMerger.class
+SHA-256-Digest: iE5GGJ1RtZ1uYLlOvl5m9phwwOUhr4ySwaJb2k3RYgU=
+
+Name: org/eclipse/compare/internal/patch/PatchTargetPage$3.class
+SHA-256-Digest: U3zEtWX+WJnyRT+ox9OoPKoLk5X5dvd4X5bbUFCKYMQ=
+
+Name: org/eclipse/compare/internal/ComparePreferencePage$2.class
+SHA-256-Digest: 313HUAuLmAyG7ddCP+wa7ZSAbb3klvadJr6Pwkj7C8o=
+
+Name: org/eclipse/compare/internal/IViewerDescriptor.class
+SHA-256-Digest: 2Cle1yLEULaOAtktwoY/zr2ja+5XkZW1DHUU2x4tjgk=
+
+Name: org/eclipse/compare/internal/patch/PreviewPatchPage2$11.class
+SHA-256-Digest: o2HqUGyAEVuNuQFOVv6DvEH9EpzNKG6yXyLHICO2dF8=
+
+Name: org/eclipse/compare/internal/CompareDialog.class
+SHA-256-Digest: a7wZPC+fooj5fVAKQg4KozYUH99V8f7CF0yocStfja4=
+
+Name: org/eclipse/compare/contentmergeviewer/ContentMergeViewer$5.clas
+ s
+SHA-256-Digest: AYF6eyo3oM9mpVf2411RKATlFyv+RWVA08BaQYyv5hM=
+
+Name: org/eclipse/compare/CompareUI.class
+SHA-256-Digest: 1fuXQ+WzwzceDoR57Tc06980C2zPn+iFQUeuAO2qgFk=
+
+Name: org/eclipse/compare/structuremergeviewer/DiffTreeViewerResources
+ .properties
+SHA-256-Digest: xOgTQqrZX9cQ+7TU47Iyy8XTOw2Z//3yiZH2uvlnxNg=
+
+Name: org/eclipse/compare/CompareViewerSwitchingPane$1.class
+SHA-256-Digest: gnbLzNX1NiUDXjBj8VUDVMnUy4wmpWw24uCgmpOevQQ=
+
+Name: org/eclipse/compare/CompareViewerPane.class
+SHA-256-Digest: pJECj10JoRDEEp6JjqEnwxyx9Pf6NvHv0Tkw/8RDZQw=
+
+Name: icons/full/dlcl16/next_nav.gif
+SHA-256-Digest: 13hQPPTj09UyLEEzbaRU1xxlaCutThSNOZJ4uAcNha0=
+
+Name: org/eclipse/compare/internal/CompareWithOtherResourceDialog$Exte
+ rnalResourcesProject.class
+SHA-256-Digest: mOA88EsaOc4eJ6mJBCHusKoLp8WNVMpw4d2zsex4ey0=
+
+Name: org/eclipse/compare/internal/patch/PreviewPatchPage2$9.class
+SHA-256-Digest: R4m8xZjBSlHYWh8e3FefPNPvZ/RgwttmMD0dIF0gIdw=
+
+Name: org/eclipse/compare/internal/StreamMergerDescriptor.class
+SHA-256-Digest: TP1t7vdsPbGdCMaa4lSmeoyy24qgIv6oEjc4l1VHaqU=
+
+Name: icons/full/ovr16/inchg_ov.gif
+SHA-256-Digest: 4qNX3LD2HEjT+tsp+E3isAoGlxhkLsBYlH8I0069+dM=
+
+Name: org/eclipse/compare/internal/patch/PreviewPatchPage2$10.class
+SHA-256-Digest: OJnWZMqSv+xtUejZJ/Q1H6Qyg4QvzHAX1TMzP4Gt2Cs=
+
+Name: org/eclipse/compare/contentmergeviewer/TextMergeViewer$26.class
+SHA-256-Digest: 8a9bMZAAUv9DDqP7eLiMRstVhEaXPKwXnRCPpBS1O+g=
+
+Name: org/eclipse/compare/contentmergeviewer/TextMergeViewer$13.class
+SHA-256-Digest: Ub5kSlLIVpw2HOi5JYty9ClFf5NkGW+fqfQIFSnLmYw=
+
+Name: icons/full/obj16/hunk_obj.gif
+SHA-256-Digest: zwkBWGYo3Zy7tUKoGOQ7gzLDa0rDzHsAzDe6ZrDGF8U=
+
+Name: org/eclipse/compare/contentmergeviewer/TextMergeViewer$33.class
+SHA-256-Digest: the5gIUBBu3dCkE+NSVG8l4X9JuQimNeNag5Yh/drHg=
+
+Name: org/eclipse/compare/internal/CompareUIPlugin$3.class
+SHA-256-Digest: rjzjsM1OojuPLBoeSQw24/KnWUW5wZB5KCQZl/hpDzc=
+
+Name: org/eclipse/compare/internal/CompareWithEditionAction.properties
+SHA-256-Digest: bs+wx/RKCMQqdXdj8HjCYo9elHKyAPWe6mnd5s4uTKY=
+
+Name: org/eclipse/compare/internal/CompareContentViewerSwitchingPane$2
+ .class
+SHA-256-Digest: G6UWTCGDMGoPEnJRPFp89n9T8pzzIwq7yUl2F9SLbSE=
+
+Name: org/eclipse/compare/internal/CompareUIPlugin.class
+SHA-256-Digest: Kf6STwPT9ZOKY+FwZYW0t61vlWxl0WQI+JVQjifAqRk=
+
+Name: org/eclipse/compare/contentmergeviewer/TextMergeViewer$19.class
+SHA-256-Digest: UMq27MggLZAIhDQ3hLYeuOW+4jHOCbgfBprGJOeu0Ho=
+
+Name: org/eclipse/compare/internal/CompareEditor$CompareSaveable.class
+SHA-256-Digest: n52Ml8ndACF3zF8/S2xPpAcc2Kem21738pxtAxRsOYs=
+
+Name: org/eclipse/compare/CompareEditorInput$14.class
+SHA-256-Digest: jlcDneIc6jL3hKSD6UsKqMH41DBiVGa136Dr0OTFr3k=
+
+Name: org/eclipse/compare/internal/patch/InputPatchPage$7.class
+SHA-256-Digest: EmRgpLLMYuz2UxvRmFy756yw0t3fz2iXT5GODFHudMQ=
+
+Name: org/eclipse/compare/contentmergeviewer/ContentMergeViewer$Resize
+ r.class
+SHA-256-Digest: 0oXoWX9TicD9BpzqSOxmlHCxl1IuCBr4k6iolpEH1Es=
+
+Name: icons/full/ovr16/r_indel_ov.gif
+SHA-256-Digest: EjVbsq3nbQRqclUXksQ28lBcWUBihTxjUgpjXpfqCgI=
+
+Name: org/eclipse/compare/structuremergeviewer/StructureRootNode.class
+SHA-256-Digest: p2yMIseiKNqGy5LHj2uQ1mBJ7nmUsidaoiR7jcauGF8=
+
+Name: icons/full/ovr16/r_outadd_ov.gif
+SHA-256-Digest: ol+A0/8VfuLOEBFCgv6EFDSNj5UdR7itpTLD53e+RYo=
+
+Name: icons/full/wizban/applypatch_wizban.png
+SHA-256-Digest: a52Y/Sp99pFFggZr+e8r/9JfWuPecI6Y2HKRwlJCK/I=
+
+Name: org/eclipse/compare/internal/merge/TextStreamMerger.class
+SHA-256-Digest: p7U2Nh+31smy8uokK9YHrpFK9O94Ce4HAMgmOFHluvc=
+
+Name: org/eclipse/compare/internal/patch/WorkspaceFileDiffResult.class
+SHA-256-Digest: IkoONO5JyR4PJnDtJq3xPTZbR1888wXjoJOC+iUk9zc=
+
+Name: org/eclipse/compare/internal/patch/InputPatchPage$10.class
+SHA-256-Digest: PR6x5NDPMEyqVGf/COQ3SS/P9WLMmz05y0w2Lf8Cp/s=
+
+Name: org/eclipse/compare/internal/CompareWithOtherResourceDialog$Inte
+ rnalExpandable$2.class
+SHA-256-Digest: AU/bA+NpgaCiO6a5lVmB4ezCRZ9R/8fzE58hoVD82u4=
+
+Name: org/eclipse/compare/internal/TextViewerCreator.class
+SHA-256-Digest: umVP99tJN6KrZFeTfXeWn/P7JX3ulTzndztKMP8Oe34=
+
+Name: org/eclipse/compare/NavigationAction.class
+SHA-256-Digest: q2GluE72P2RVTe4dRQa9hWpLTCYIQ2Qoj0+YwIWgzZE=
+
+Name: org/eclipse/compare/structuremergeviewer/IStructureCreator2.clas
+ s
+SHA-256-Digest: +Yc8zcfXQ4QkzaLh1+s5GRNFcUNQFxK2Mz9ZfhIsVv0=
+
+Name: org/eclipse/compare/contentmergeviewer/TextMergeViewer$21.class
+SHA-256-Digest: GnCxJlWYK85fikezQhjbSuYNkxb0Vkd/jxjM7gk4zlM=
+
+Name: org/eclipse/compare/internal/ContentChangeNotifier$1.class
+SHA-256-Digest: AQKWVBuBr7M8bzrR/f90OZ/BSkFPJQS3dlcVrAfULt4=
+
+Name: icons/full/elcl16/syncpane_co.gif
+SHA-256-Digest: l53xzz5B4ntslouM1T/4Ze6RMYSjcu/7izmwFel4VdU=
+
+Name: org/eclipse/compare/internal/ICompareUIConstants.class
+SHA-256-Digest: jAlCmEjk5N5+0gjt7vdmU+TRkKx12OrKo/5YDt4qA6g=
+
+Name: org/eclipse/compare/internal/ResourceCompareInput$SelectAncestor
+ Dialog$1.class
+SHA-256-Digest: CpzgopXO5oQQMNgmZ0u2Ph/qbESYNfjhYufXrG9dQTI=
+
+Name: org/eclipse/compare/CompareConfiguration.class
+SHA-256-Digest: 2gRZusiwBelc+R1Woy2XGnIbFdkAb/VJ3xrXqMHAOto=
+
+Name: org/eclipse/compare/internal/ViewerSwitchingCancelled.class
+SHA-256-Digest: xtatLS3SbSVQpwQY0jujfFlup5kphRIErbsJBWggjNk=
+
+Name: org/eclipse/compare/EditionSelectionDialog.class
+SHA-256-Digest: 5t72stpLZR033i+blxmSwnAxZiwCvU88sBWHiTXbl5o=
+
+Name: org/eclipse/compare/structuremergeviewer/DiffTreeViewer$5.class
+SHA-256-Digest: kzRKAMIYeelY0r7FSfEJq7ZtGS4xVZBgXSbcE1YJdz4=
+
+Name: org/eclipse/compare/internal/ImageMergeViewerCreator.class
+SHA-256-Digest: SDua0fU+j03eOpJK/vIKSqpOLVTewRbOQAg5waldpAg=
+
+Name: org/eclipse/compare/EditionSelectionDialog$11.class
+SHA-256-Digest: V/TIadgYyqIKnUZEv236XXdU8NtjZbawiUce5N+NVCg=
+
+Name: org/eclipse/compare/IModificationDate.class
+SHA-256-Digest: 0AWH26hROuwWS1dVWeIWF3epZgJkP2kv5/taLHrXvVY=
+
+Name: org/eclipse/compare/internal/CompareUIPlugin$4.class
+SHA-256-Digest: s4nVOd7JyKjnhAh2BtOKpp5Mi1sunbexvc3KpPBkMeg=
+
+Name: org/eclipse/compare/internal/patch/PreviewPatchPage2$8$1.class
+SHA-256-Digest: G0WcDEWsH5h7W1KFjnnIWlMrlkL/kl3WcJGZ1tr762w=
+
+Name: org/eclipse/compare/contentmergeviewer/TextMergeViewer$14.class
+SHA-256-Digest: VA/78r+JFJFlk9V0piskGSHt/4DIWUdOitSZx/hIYxk=
+
+Name: org/eclipse/compare/internal/CompareContentViewerSwitchingPane$3
+ .class
+SHA-256-Digest: rdbNAsVX2ar09GkkJYHgQNByXNKx7IWk1/c3NjexjcI=
+
+Name: icons/full/elcl16/prev_change_nav.gif
+SHA-256-Digest: IH1yjIwDb7Db7Jpsjg/oZsocGu2jaz5WFfG55Lh/3c4=
+
+Name: org/eclipse/compare/contentmergeviewer/TextMergeViewer$FindRepla
+ ceTarget.class
+SHA-256-Digest: B9lH7l1o44wfr30CcJ1366ZDmuloEfhZqfyBQlA7g78=
+
+Name: org/eclipse/compare/BufferedContent.class
+SHA-256-Digest: YXU/XU4T61zEwuQTv9SJRtA69bx51wNwN5Y/9ThzSkY=
+
+Name: icons/full/ovr16/add_ov.gif
+SHA-256-Digest: EprrniKVL1z7G5JnB4JNOzJmv7YR4P1UcBhVtyUuoq8=
+
+Name: org/eclipse/compare/contentmergeviewer/TextMergeViewer$27.class
+SHA-256-Digest: aycRq3L0zHGBIg83sWpfZVASmRckO0ePBpj45gDJryE=
+
+Name: icons/full/ovr16/confchg_ov.gif
+SHA-256-Digest: SI339e6TsrSZk64GL6IjchZA/xK7vUbEdJ5pZmZIV+o=
+
+Name: org/eclipse/compare/internal/Utilities$1$1.class
+SHA-256-Digest: srlWkczRIG9Lri/zhPa2rp3jbmtUgM1WlJ3Pc54RWfI=
+
+Name: org/eclipse/compare/internal/CompareEditorContributor.class
+SHA-256-Digest: Vv79ha3BcZkLYmTk7+b2E1V2o+GTHUWIgaPfzonx9eM=
+
+Name: org/eclipse/compare/internal/CompareWithOtherResourceDialog$Inte
+ rnalExpandable$1.class
+SHA-256-Digest: JvxOumvc3i6HBQ2vVk8VDnzWplUqiFbShT6oa6IqHA4=
+
+Name: org/eclipse/compare/internal/patch/PatchFileTypedElement.class
+SHA-256-Digest: 3N/dfONcs7o9Grzm1fqb9ZzJkybrdEECdnyI9jCMKNU=
+
+Name: org/eclipse/compare/internal/MergeViewerContentProvider.class
+SHA-256-Digest: gRPloba/uzJZbxsz6u2D6HWx1u3nQPhwoQNpProgkgc=
+
+Name: org/eclipse/compare/contentmergeviewer/TextMergeViewer$32.class
+SHA-256-Digest: RwaveM/jjZ8yF90r/INdlOzDqjB+miZTWHcy0GGl1yE=
+
+Name: org/eclipse/compare/internal/patch/Utilities.class
+SHA-256-Digest: ga2CQZ834/1jf23uNx9spo9glFZrGZUDRh2pNdXZ4vM=
+
+Name: org/eclipse/compare/structuremergeviewer/ICompareInput.class
+SHA-256-Digest: hnN3F8nuCSikfJHjZNi4z9ivOtuAXGaniE2eKzEOe8E=
+
+Name: org/eclipse/compare/internal/ISavingSaveable.class
+SHA-256-Digest: GJ5SfeWN+akcPxkl0EAEC1F8oxODeEk6lXJZOXzXxu0=
+
+Name: org/eclipse/compare/internal/patch/DecoratorOverlayIcon.class
+SHA-256-Digest: xS0o1ltV6FQ32Gyo6bhrvfIZTqc51jUtuv11twPJPV0=
+
+Name: org/eclipse/compare/contentmergeviewer/TokenComparator.class
+SHA-256-Digest: Hzy1TG+CAupUjJl0e9ZVFk2tccVSRM8M1Xf1SWD/24k=
+
+Name: icons/full/dlcl16/syncpane_co.gif
+SHA-256-Digest: VIO2SYN6cpTH4cjSVB1QwOSirnwp+UvBOat9DQppmdI=
+
+Name: icons/full/dlcl16/next_diff_nav.gif
+SHA-256-Digest: WfuFm7bLHa2SM2ac6q109RAS5dMH7R0Ux4hFBxvlNEk=
+
+Name: org/eclipse/compare/contentmergeviewer/TextMergeViewer$20.class
+SHA-256-Digest: vgntGF4rabCyRjgxq2ijMdb6R9CwAt65xmSI6+gVpZs=
+
+Name: org/eclipse/compare/internal/ImageCanvas$4.class
+SHA-256-Digest: CHNKK8YaBlqRcdZtOM36iAapfPgimLC4kAYt5VR9Dcg=
+
+Name: org/eclipse/compare/EditionSelectionDialog$10.class
+SHA-256-Digest: beKoIA/d8sL2+o+RfYXci04exg6aj1p3vBWSIWvO2Xs=
+
+Name: icons/full/ovr16/merged_ov.gif
+SHA-256-Digest: gTERibXk7F0SqoyA12KLUcG915IJx6shvtiMcz3U6aM=
+
+Name: org/eclipse/compare/internal/BinaryCompareViewerCreator.class
+SHA-256-Digest: xA6kRRFZtXPAxZiWSd/DzfUzaJWivNwnZHEmtda2byQ=
+
+Name: icons/full/dlcl16/copycont_r_co.gif
+SHA-256-Digest: 2DsKQ8o/5BIh9IiqOdrdaAX//BYPyREfN5fNmfoL/2E=
+
+Name: org/eclipse/compare/internal/ResourceCompareInput$MyDiffNode.cla
+ ss
+SHA-256-Digest: tL/uUnRil51xVcrIb3GI+XmDjOLuL+C5e6Vgxjtq2yY=
+
+Name: icons/full/ovr16/r_inchg_ov.gif
+SHA-256-Digest: wZZp08qi3LhzoUT7o64n54+U/2ZP4B9aHA+88vDpOKk=
+
+Name: org/eclipse/compare/EditionSelectionDialog$9.class
+SHA-256-Digest: jO5Nt3CLbaabLxgnECuSYLyReFg569nTSAnb4qJ+2uA=
+
+Name: org/eclipse/compare/internal/patch/WorkspacePatcher.class
+SHA-256-Digest: LMlMuLtzwMWadVOmNhp3OVWvx0KDsHSOG4sxRf5xuaM=
+
+Name: org/eclipse/compare/internal/ComparePreferenceInitializer.class
+SHA-256-Digest: hfpCf+fy61Plk2sSshZy3jJxDv/QLViMDBvFe71RwyA=
+
+Name: org/eclipse/compare/internal/ContentChangeNotifier$1$1.class
+SHA-256-Digest: 58a5JA8D/IywHC9p7mkApUgudUxVUNEtYPpFhpTzOBo=
+
+Name: org/eclipse/compare/ICompareContainer.class
+SHA-256-Digest: IVWaCI+tmVXFlISgW0CtanrvmW7C/+iLErkXqOqEGlU=
+
+Name: org/eclipse/compare/internal/patch/PreviewPatchPage2$9$1.class
+SHA-256-Digest: DqqiTiOV22d6bqicnFco9RkYfixRSJhwG5Ss07KXKCk=
+
+Name: org/eclipse/compare/internal/MergeSourceViewer$TextEditorAdapter
+ .class
+SHA-256-Digest: rbkx5MVLE40IfmZxxoqwvTd9tmXLGRkGYFAHK8R0QvQ=
+
+Name: org/eclipse/compare/structuremergeviewer/DiffTreeViewer$DiffView
+ erLabelProvider.class
+SHA-256-Digest: 7vv1M72eoJ9BsvotUqw9lvx2lE8V/d23ZEAxnuvTNNg=
+
+Name: org/eclipse/compare/internal/CompareWithOtherResourceDialog$Inte
+ rnalExpandable.class
+SHA-256-Digest: Fe3J9oqW7qCrWvy5C1PEL1Ihcuj+8BtC+yQrQ+t76io=
+
+Name: org/eclipse/compare/internal/CompareWithOtherResourceDialog.clas
+ s
+SHA-256-Digest: tS6Ls3prJVAipP98behMOB5muyb+vJjQKtXRZ8n4p4I=
+
+Name: org/eclipse/compare/internal/patch/PatchFileDiffNode.class
+SHA-256-Digest: 5xcqPgtcOdUQPhaEPQC6jGwhb7U7VR85hMnd1Pk/ehs=
+
+Name: org/eclipse/compare/internal/CompareContentViewerSwitchingPane$1
+ .class
+SHA-256-Digest: Tts8QomUrUQxvh7++wg5nD1wrxmEI4wHvcx8y2tW1Ls=
+
+Name: org/eclipse/compare/contentmergeviewer/TextMergeViewer$22.class
+SHA-256-Digest: 22RGLX9oCk2OWzzP8mYM8ZzivMsvXfoLZMSdlM+UquM=
+
+Name: org/eclipse/compare/internal/ContentChangeNotifier.class
+SHA-256-Digest: E07lXT3AsV4LCm8C2RTrL1VHJwm6jC1MZ2DPudgXLGQ=
+
+Name: org/eclipse/compare/internal/ImageCanvas$3.class
+SHA-256-Digest: 66Me2no6/4Id8wIyhb5lVnQYOmeyuh4AQ/ZxKkfV9RM=
+
+Name: org/eclipse/compare/internal/merge/DocumentMerger$IDocumentMerge
+ rInput.class
+SHA-256-Digest: VanbMQG6AEsMpzyCnQfdWwO+waQ2Mwt8g6bYaMy/9Eo=
+
+Name: org/eclipse/compare/contentmergeviewer/TextMergeViewer$17.class
+SHA-256-Digest: /8a2b9iKgwPF8ZWOfCK+ZSe0hGWS56VkXKWbwuFB870=
+
+Name: org/eclipse/compare/internal/Worker$WorkProgressMonitor.class
+SHA-256-Digest: /wuTwp6R0ZxfJBfpCbx0lf9Y2Wcll2Im5cYNk8WW2LY=
+
+Name: org/eclipse/compare/internal/CompareUIPlugin$5.class
+SHA-256-Digest: +dZNeCR3Qs4tBnOCs5JkgRO1EeRYyTCMtgc6y5qw1ew=
+
+Name: org/eclipse/compare/structuremergeviewer/DiffNode.class
+SHA-256-Digest: FP5KlN2hA0cAwLhwBtAUgT3XgjYfdQW4bUpn6HSFiVQ=
+
+Name: org/eclipse/compare/contentmergeviewer/TextMergeViewer$40$1.clas
+ s
+SHA-256-Digest: rPwy87FA8HuP1IxBldSYKjglboVSq1x91scT7eDu0iA=
+
+Name: org/eclipse/compare/internal/ViewerDescriptor.class
+SHA-256-Digest: q6Ej3Za5OqJc9caEQZcFwonjKeXJQ9Fy6E8JGEes1Wo=
+
+Name: org/eclipse/compare/contentmergeviewer/TextMergeViewer$25.class
+SHA-256-Digest: 6djqNOesXSiNst4oeQTxcuE+zItY4lUmglr1o6pnNYs=
+
+Name: org/eclipse/compare/internal/patch/Patcher.class
+SHA-256-Digest: PDYCRgdBl3WNSTV7k917rbqJ2cL9Nj0BDqIHHd8m0gw=
+
+Name: org/eclipse/compare/structuremergeviewer/Differencer.class
+SHA-256-Digest: +dSYvloMr8qgBEnv/vG4NKFuOj7KFriDIngE7j08Xvk=
+
+Name: org/eclipse/compare/internal/ImageCanvas$2.class
+SHA-256-Digest: 0MdGJM3biAtPLMXkPw5K8nf+VfSHD1nnluC9y9XrpVc=
+
+Name: org/eclipse/compare/contentmergeviewer/TextMergeViewer$18.class
+SHA-256-Digest: g3PC0zfYun2MiXqcs8Hk6FuhStoVArkMOQLtVIrRaqc=
+
+Name: org/eclipse/compare/internal/patch/DiffViewerComparator.class
+SHA-256-Digest: Npm6o4lHIlLPtz7KNDmupGFG/rDoVluN1EAJ5J0uRJw=
+
+Name: icons/full/dlcl16/twowaycompare_co.gif
+SHA-256-Digest: c/RzeZitAXWCQlEV0dr/Bz+XCtXNpQpW05wePqShIG4=
+
+Name: org/eclipse/compare/SharedDocumentAdapter.class
+SHA-256-Digest: Ltz0s7rbyTtxylxfrFteymaq+mg8Z+BUXMVr4hrQ50Q=
+
+Name: org/eclipse/compare/internal/CompareEditorInputNavigator.class
+SHA-256-Digest: jLcyj+TvNm5tN4tM7wVJ/FD/013o+YTtds9G/OgZZJw=
+
+Name: org/eclipse/compare/internal/ResourceCompareInput$FilteredBuffer
+ edResourceNode.class
+SHA-256-Digest: HsIWhSmyO67nXpShMJEYBe6qeUrbKdGYrDgpMJtdIEk=
+
+Name: org/eclipse/compare/ICompareInputLabelProvider.class
+SHA-256-Digest: hW7E7oKnmZz+zzZ5kD3r9qHD3FN4RmJVUgE3BKr866U=
+
+Name: icons/full/obj16/message_info.gif
+SHA-256-Digest: 1mPSOlUbJ6c+sf3X/UluHUoq+dd7HMVVZElw4bzgkrc=
+
+Name: org/eclipse/compare/contentmergeviewer/TextMergeViewer$24.class
+SHA-256-Digest: naiMhRv2OfolBSnmyGaoysxtuNMJjmaf3blvKgQl4qE=
+
+Name: org/eclipse/compare/ZipFileStructureCreator$ZipFolder.class
+SHA-256-Digest: 0BcztGWPdN7eZdJuf2yemJtbRqw1DM1bjIfJS5k1Qe8=
+
+Name: org/eclipse/compare/internal/ListContentProvider.class
+SHA-256-Digest: ZnkgxQr/x3w9swULNDJrP3PZ7dXUFl+umKohdoknJCg=
+
+Name: org/eclipse/compare/internal/Utilities.class
+SHA-256-Digest: HjVFJYiDEFfwxFabuNtO/nIdBbL5KUUB0rp5Itk9UnA=
+
+Name: org/eclipse/compare/structuremergeviewer/DiffTreeViewer$2.class
+SHA-256-Digest: z0eaNADC5FfsDgQ+hLMgf0zGqhUKlTlfGm27gK6Ey9s=
+
+Name: org/eclipse/compare/IViewerCreator.class
+SHA-256-Digest: AacbdvOv7yARikzQ1I+zOeTvjRoUNI8vK6qjdoE8O18=
+
+Name: org/eclipse/compare/CompareConfiguration$DefaultLabelProvider.cl
+ ass
+SHA-256-Digest: e4jiJqgSdPq42A6zXxttLoghYYczd7jyuFYUFdKPq7Q=
+
+Name: org/eclipse/compare/internal/ImageCanvas.class
+SHA-256-Digest: I/2ZwIPQd4Zw8tIHYG9G73eiARx1RQv6jGx5YZ9FSPU=
+
+Name: org/eclipse/compare/internal/OverlayPreferenceStore$PropertyList
+ ener.class
+SHA-256-Digest: AbTJXYt/erv10F9E+t34fLCpKEyYD1q5nGTiOnPQarU=
+
+Name: org/eclipse/compare/internal/ImageCanvas$1.class
+SHA-256-Digest: WHxQt7I3Gk2QOm39UxXgYp4Pws2P6ugJINCs0Nr6nbk=
+
+Name: org/eclipse/compare/structuremergeviewer/DiffTreeViewer$4$1.clas
+ s
+SHA-256-Digest: 7yvd0R7zazeKo2SFMH6Fu1HNhAfhfuHW2O54avQcSD8=
+
+Name: org/eclipse/compare/CompareViewerSwitchingPane.class
+SHA-256-Digest: IVD823kyB87mrStVOzD+zVXfVc3qXeEnO019oWzMIkI=
+
+Name: org/eclipse/compare/structuremergeviewer/DiffTreeViewer$1.class
+SHA-256-Digest: wucCIEXnUwebbByz9dJek95cklMmIwx8sljHfSc+rp8=
+
+Name: org/eclipse/compare/contentmergeviewer/IDocumentRange.class
+SHA-256-Digest: 0cETrpvstYWC+j+KbvexnFHozsdPmgJd9OgGgZd3XaI=
+
+Name: org/eclipse/compare/internal/AdapterFactory$1.class
+SHA-256-Digest: OFe2dpWOsuwN6yhWdnj2mkWz1zIIZd3ZoT1rjYXm4jg=
+
+Name: icons/full/ovr16/indel_ov.gif
+SHA-256-Digest: 0zy3BkhORZZtlR5pYP/mM1GF+N7EwYZhPW36A7M23F0=
+
+Name: org/eclipse/compare/internal/CompareWithOtherResourceDialog$File
+ TextDragListener.class
+SHA-256-Digest: p1WtCXlDTXcLYFCd+cfutp8XxhHYOlZCeZkjApZbQgY=
+
+Name: org/eclipse/compare/contentmergeviewer/TextMergeViewer$Contribut
+ orInfo.class
+SHA-256-Digest: ugbOoToTLtDoCXRdq67iRk2JH5abgaiukavHJRx/WKQ=
+
+Name: org/eclipse/compare/internal/ImageMergeViewer.class
+SHA-256-Digest: YuSSdr09bGPZcf/anHiombbay1HXWahpXUiLjyvjbnc=
+
+Name: org/eclipse/compare/internal/patch/PatchWizard$1$1.class
+SHA-256-Digest: HUxiR4rzscHtIu3kc5iMZYNi9poiC7MlKyeCBvsIbDY=
+
+Name: org/eclipse/compare/internal/ResourceCompareInput$1.class
+SHA-256-Digest: AifBeIwqf5gUHyGV8T85BJ6y/Ne34HmqdAgGxPpSU9Q=
+
+Name: org/eclipse/compare/internal/ReplaceWithEditionAction.properties
+SHA-256-Digest: y4zNR+HKFR/unHTetvcFz8kqUoBbGPPgckMZ77YwIQY=
+
+Name: plugin.xml
+SHA-256-Digest: ukS8R4j7YVe8yJEXG8tqg8Asc18RIdwMcuw6NPNE3zo=
+
+Name: org/eclipse/compare/internal/patch/PreviewPatchPage2$20.class
+SHA-256-Digest: LhquJOAuy7jZkVVxVwYN2o0F6WiPW0o5QlyqjWbtg7k=
+
+Name: org/eclipse/compare/internal/CompareMessages.properties
+SHA-256-Digest: WupQOxIGCV1t4APDYkSCKZyDEukp8c+G3xy9o0TUVRY=
+
+Name: org/eclipse/compare/internal/CompareWithOtherResourceDialog$Work
+ spaceContent.class
+SHA-256-Digest: eD8yfIPAA4t23SdXeCgcTgHkfQBqhjtgJSnQhBT27Es=
+
+Name: org/eclipse/compare/CompareViewerPane$4.class
+SHA-256-Digest: adkqUBIKJtKtRoqe8MCBak6TSHqrGyFnS9lfg1Z1U/g=
+
+Name: org/eclipse/compare/internal/BufferedResourceNode.class
+SHA-256-Digest: +iCiT/DIszFoGFcHIO6zXEo+YREv2J1t2fX6EWOemcw=
+
+Name: icons/full/elcl16/next_diff_nav.gif
+SHA-256-Digest: Hd6Qm1oI0X2QR4BO1nhpV9pmldSOwvWxNyIX37/Hacw=
+
+Name: org/eclipse/compare/internal/patch/PatchCompareEditorInput$2.cla
+ ss
+SHA-256-Digest: +xvNex9/IW9QSpiH000LNNuIQa5JsCSTOGhF5XJ9hiE=
+
+Name: org/eclipse/compare/internal/CompareWithOtherResourceDialog$Exte
+ rnalFileContent.class
+SHA-256-Digest: FjKkWxZnXEJecoApxsbZV8jpFTLyK1tQKDRbPlSMUd0=
+
+Name: org/eclipse/compare/contentmergeviewer/TextMergeViewer$16.class
+SHA-256-Digest: wtB6J/HvzThW7A2AYnQybm9qqg+D7AUo+0I+C3lwS8U=
+
+Name: org/eclipse/compare/internal/Worker.class
+SHA-256-Digest: K6EQyDgNFOE+ubCZOyX7QYgQXKJeY+Yz2RC8DGfZsiI=
+
+Name: org/eclipse/compare/contentmergeviewer/TextMergeViewer$29.class
+SHA-256-Digest: PHwFbll6LoBc5P3/GBMpQ+IkEbe8ST3qx3YHL5CCcS8=
+
+Name: org/eclipse/compare/internal/AbstractViewer.class
+SHA-256-Digest: XoxnFnzmd2D8YlRXvN9SWBnQNEHq+mqSqE1NkSU3iRQ=
+
+Name: icons/full/elcl16/copy_l_co.gif
+SHA-256-Digest: xNe+lls2R4g7X+032IZ2UeuYbSfRlzCvUDALK7/aVGM=
+
+Name: icons/full/elcl16/prev_nav_into.gif
+SHA-256-Digest: kQWEPVf5PmFRdgFzjV7kFKDvgcXSzXoe/oi03nLv47Q=
+
+Name: org/eclipse/compare/internal/patch/Utilities$1.class
+SHA-256-Digest: H4VjCggl7tR+5eiHWPkmenG1EXHLFnYHxHf7d5aRi24=
+
+Name: org/eclipse/compare/contentmergeviewer/TextMergeViewer$30.class
+SHA-256-Digest: Ohz6oqRpNSRc0RyoL/gWtCHgnP0Me1Vn51NImaqzLqQ=
+
+Name: org/eclipse/compare/internal/CompareEditorSelectionProvider.clas
+ s
+SHA-256-Digest: FFb7rw6HO8L4byvkRzdrk8SrCGj8QlVq6uqVZ0xxwec=
+
+Name: .api_description
+SHA-256-Digest: jbObI50YJnzF2ZjYVqpdck369GICIBkTgV5x/+rSC2c=
+
+Name: org/eclipse/compare/patch/WorkspacePatcherUI.class
+SHA-256-Digest: /44MYoO6CAAPF7Hif1AUjEfJHSKc07j7yc3gnxQdMbI=
+
+Name: org/eclipse/compare/contentmergeviewer/ContentMergeViewer$6.clas
+ s
+SHA-256-Digest: Erzhn5wDi6tQoJWMJwKYQGPGW8srNZmmr9JpMRIVtDo=
+
+Name: org/eclipse/compare/internal/ResourceCompareInput$2.class
+SHA-256-Digest: uNHpPuv1AMeLpgAv/7pvSMWm/SARfOC2RF3ieRhACDM=
+
+Name: org/eclipse/compare/internal/MergeSourceViewer$TextOperationActi
+ on.class
+SHA-256-Digest: wpY2uQY14sPOMlCaX3aicYQ3wCvh4CeFj4B9Kuq2/qM=
+
+Name: org/eclipse/compare/internal/patch/InputPatchPage$4.class
+SHA-256-Digest: oQDdYdeX4RNY1iGM/nJmG3x08WlKWnvfGnQM3NFGg3s=
+
+Name: org/eclipse/compare/internal/ICompareContextIds.class
+SHA-256-Digest: O5auyAcZ7j55VZ8sL6JWZm4wmHEdPPSEssexXMeXL+o=
+
+Name: icons/full/ovr16/confdel_ov.gif
+SHA-256-Digest: bdtqsHret4zy2AoW3Q0XNj1Z9j5slfE70tEn6h+O3es=
+
+Name: org/eclipse/compare/internal/patch/PatchTargetPage$2.class
+SHA-256-Digest: p3LxORK8Wd1i99cl90UkwYvRQPrEmdxMa+k0Im+pl2s=
+
+Name: org/eclipse/compare/internal/patch/PreviewPatchPage2$1.class
+SHA-256-Digest: cB0iPFQJwP95a6GYiNkDLKZbtR3x9VU65FzrDvs5aqA=
+
+Name: org/eclipse/compare/internal/CompareWithOtherResourceDialog$Inte
+ rnalSection.class
+SHA-256-Digest: KnVdxKaIb4sdYi/c1AQGESZ0EVvZwZ72seR2fqGDANA=
+
+Name: org/eclipse/compare/internal/ChangeCompareFilterPropertyAction.c
+ lass
+SHA-256-Digest: bC7+5gkpa0bP/eLyFBlBO54+1TRbPR37o/o4Dkb7ZbA=
+
+Name: org/eclipse/compare/internal/ReplaceWithEditionAction.class
+SHA-256-Digest: 9fXIXlWn42bOdzNUhX1tqbwSAGkdgXsyBNUCpymhLLE=
+
+Name: org/eclipse/compare/internal/patch/PreviewPatchPage2$6.class
+SHA-256-Digest: fv4SKmgzuDnHw+7wJqf36AUtmRFLVUkqQEdJAbeUGMQ=
+
+Name: org/eclipse/compare/internal/WorkQueue.class
+SHA-256-Digest: h0BkQX5tKcqbqCYJnqUQYl0OhKrJ6khDKF9dSUyJnu0=
+
+Name: icons/full/dlcl16/prev_diff_nav.gif
+SHA-256-Digest: ijnspABh+NLPKo1/jOT1rH6/wuKcbJjepeAtGI/qrYI=
+
+Name: org/eclipse/compare/CompareNavigator.class
+SHA-256-Digest: U6w640zYJ9KxGNfbTvGq9bwShErs3AQ6S6h0WCi0DAw=
+
+Name: org/eclipse/compare/ZipFileStructureCreator$ZipFile.class
+SHA-256-Digest: J+YUSulK/rVlPnCBxHgS1PUbYIOr2jCtYPgNMfpZn8c=
+
+Name: org/eclipse/compare/internal/patch/PatchWizardDialog.class
+SHA-256-Digest: Fj2qekolfft92rntFuxlGMY+sgyc2YjdPr0YHSJsnJQ=
+
+Name: org/eclipse/compare/internal/SimpleTextViewer.class
+SHA-256-Digest: QIAWfYk2bLYat2NqnW6dmGcvGLu8395LRNeYIqJjDwE=
+
+Name: org/eclipse/compare/internal/OverlayPreferenceStore$OverlayKey.c
+ lass
+SHA-256-Digest: IoJrbIkYcRx892WcCwJDndDjNUqEvFIigFYSHb8Mw6k=
+
+Name: icons/full/elcl16/next_change_nav.gif
+SHA-256-Digest: nv+n1bD/LPNNbJjdqxWnMlBj3s0TmXDLlR0XZexUVIs=
+
+Name: org/eclipse/compare/EditionSelectionDialog$1.class
+SHA-256-Digest: 5IKrHFAKkOVTTid2dteOTw3/tz97kScFh4PkMJSJ7fs=
+
+Name: org/eclipse/compare/structuremergeviewer/SharedDocumentAdapterWr
+ apper.class
+SHA-256-Digest: 1gSg0a0uV1DOXQBFS4Nft2lMMf6rfCMMPuBnis5E7So=
+
+Name: org/eclipse/compare/internal/patch/LineReader.class
+SHA-256-Digest: Eo8ZEsWscpImsN9f8NH7AC000FYNUikWSxquoXgwN/Q=
+
+Name: org/eclipse/compare/CompareEditorInput$9.class
+SHA-256-Digest: 57HyBXyQkfxBe89OZkbDxsy++1qByEXPAPcf7R1PVSk=
+
+Name: org/eclipse/compare/CompareEditorInput$2.class
+SHA-256-Digest: Y30eZWNIgVVOaEg6HhAB6SB+jkWS72GxL1D+PWRt8M4=
+
+Name: org/eclipse/compare/internal/BinaryCompareViewer.class
+SHA-256-Digest: U/LwANc4bdL3abH1jDG9fKK6/NGxwBD2qBzg6QLgSVM=
+
+Name: org/eclipse/compare/structuremergeviewer/StructureDiffViewer.cla
+ ss
+SHA-256-Digest: 5VDIukcwC9QGrCLrRDBJJXpTRMPYb6n+SEqjDG/rFKM=
+
+Name: icons/full/etool16/ignorews_edit.gif
+SHA-256-Digest: j6z0aW1kw4ERlV2uPwNGbkqwREX3iJQy5Y9/MziQw5I=
+
+Name: org/eclipse/compare/internal/CompareEditor$1$1.class
+SHA-256-Digest: obZBTCgpHOPWH8flCDyeNgq7Dgj8SaKqgTnIpRsuqxo=
+
+Name: org/eclipse/compare/contentmergeviewer/ContentMergeViewer$1.clas
+ s
+SHA-256-Digest: SfGPwtBH3tpP1Zwqw2isYTsFwr1bTgxwSU2UJBpPDME=
+
+Name: org/eclipse/compare/structuremergeviewer/DiffTreeViewer$4.class
+SHA-256-Digest: P+zo0VquVkkVMSRplbnCfnk8CCWiZaveDz2ZEVkyhcg=
+
+Name: org/eclipse/compare/internal/ResizableDialog$1.class
+SHA-256-Digest: yAvkxnhn7w2RVG+e4noiSH5FqtY+nvOI+yfgEFJYtr4=
+
+Name: org/eclipse/compare/EditionSelectionDialog$8.class
+SHA-256-Digest: L6CK9cj+0FfbqYsj3VIcIBH7J0ovBncDuWkEShhIaf0=
+
+Name: org/eclipse/compare/internal/AddFromHistoryDialog$FileHistory.cl
+ ass
+SHA-256-Digest: WY34hZlkLRnA46M8R7I37CvO1B4WwD4zLB1PzWQSyso=
+
+Name: org/eclipse/compare/CompareEditorInput$10.class
+SHA-256-Digest: QwGnVBVeiBn7KsECUNwSP0PNSL8Prcq/0LlaVlWcAyY=
+
+Name: org/eclipse/compare/contentmergeviewer/TextMergeViewer$HoverResi
+ zer.class
+SHA-256-Digest: 7hrG/gSeOObrOAg6BPpRDoscN8ZVo2mv46gwBp/PdyE=
+
+Name: org/eclipse/compare/internal/patch/InputPatchPage$9.class
+SHA-256-Digest: ACZd0w+Vgfdiiba6PerAxMiIELkM4656BJTUQb81MMw=
+
+Name: org/eclipse/compare/ISharedDocumentAdapter.class
+SHA-256-Digest: q3vpLHKN/JoS4+xjFc9OaeQKJmLZBe2BH0bbusdVE7s=
+
+Name: org/eclipse/compare/contentmergeviewer/TextMergeViewerResources.
+ properties
+SHA-256-Digest: Wy2UxDwlIoZcbLfoqgFxvyZqKm7J1ahylzL1YhOb9bk=
+
+Name: org/eclipse/compare/internal/patch/PatchMessages.class
+SHA-256-Digest: YLRBlaYTW7CWTz4DfdYd5w9PmR+QlUXhAqWym1o7NVU=
+
+Name: org/eclipse/compare/internal/CompareWithOtherResourceDialog$Inte
+ rnalGroup.class
+SHA-256-Digest: jOa8CRpXwJ+yH7r+EJtlB/qboRZRCZR7xph/Es28Dl0=
+
+Name: org/eclipse/compare/internal/merge/DocumentMerger.class
+SHA-256-Digest: VlHZlDPeT6y2ksaXhMjrEqqiH6rMscGMokbsaTQ1V4o=
+
+Name: org/eclipse/compare/internal/patch/FilePatch.class
+SHA-256-Digest: B9BJoChB2jnYDEt7h44Xys3Vag+j0X+fefNznUP5wwo=
+
+Name: org/eclipse/compare/contentmergeviewer/TextMergeViewer$9.class
+SHA-256-Digest: DODrxF/C82F08Rr64ReS5hrydQ4LlQm846kJbICz8A0=
+
+Name: org/eclipse/compare/internal/EditionAction$1.class
+SHA-256-Digest: 0OAdfENlwzs8h9MsVnT4qKkEJr31y9enZ/nIX3zLH70=
+
+Name: org/eclipse/compare/contentmergeviewer/IMergeViewerContentProvid
+ er.class
+SHA-256-Digest: UcTC5bAgLvIHU4sgKIB/pfdVdcdF6UpwYlboGCVsYiI=
+
+Name: org/eclipse/compare/internal/CompareEditorSelectionProvider$Inte
+ rnalPostSelectionListener.class
+SHA-256-Digest: tSulO/ICzOEI64ZsLeAhT000A4oxl3KXv4oFwVNKJB0=
+
+Name: org/eclipse/compare/internal/patch/Patcher$1.class
+SHA-256-Digest: yqUaTGxI309PdrBY83GnO4+yWvrRA2yotZF2fpa2XiE=
+
+Name: org/eclipse/compare/internal/patch/PreviewPatchPage2$14.class
+SHA-256-Digest: yRCDRQxerppmgprW1/60l4dkWohaXLRUGiZ4P9unWCg=
+
+Name: org/eclipse/compare/internal/CompareContainer.class
+SHA-256-Digest: XW+lb8664QHkysWYq+u0afD5LbG1KmzdJQVMdm9il0g=
+
+Name: icons/full/dlcl16/copycont_l_co.gif
+SHA-256-Digest: WXV/enm4qDNt3A7/69gytnw3203lfgTISuw65ldANcE=
+
+Name: org/eclipse/compare/internal/WorkerJob.class
+SHA-256-Digest: cSUXwiQYHy+oH/7k9Zo1GJVkbmGPg7KrWxqmVHHVeoo=
+
+Name: org/eclipse/compare/internal/patch/PreviewPatchPage2$8.class
+SHA-256-Digest: 2ylrtHpqh7V5Xqs4Yl9dGVPZz62Qz2PpenNJvbCWhB4=
+
+Name: icons/full/dtool16/ignorews_edit.gif
+SHA-256-Digest: L2+6nmd+srYHc6ldTuXCq115No+6O8ZbdcPQGCfRoys=
+
+Name: org/eclipse/compare/contentmergeviewer/ContentMergeViewer$4.clas
+ s
+SHA-256-Digest: RGWTq6m8pfQDiuyz7cDePV7c6I48YfiAJsmKd4CG7QM=
+
+Name: icons/full/ovr16/outdel_ov.gif
+SHA-256-Digest: 45ECF1hadgY/5M4TT02yKnwIaD7AlP00Df9+OoARMHE=
+
+Name: org/eclipse/compare/structuremergeviewer/DiffTreeViewer$DiffView
+ erContentProvider.class
+SHA-256-Digest: lTPthaZK8vyR2nDH4pkd/RdYfa7e/ozPViN+OqL3NDU=
+
+Name: org/eclipse/compare/EditionSelectionDialog$6.class
+SHA-256-Digest: 90iHXg326cnk+h0eU5uAhQHbtoa3AqBZ6SxdNrsF9EQ=
+
+Name: org/eclipse/compare/contentmergeviewer/ITokenComparator.class
+SHA-256-Digest: ugFo3MzJJvXbUgWoWNrj13oyFuxDRXy2N7cRb6C/xQs=
+
+Name: org/eclipse/compare/internal/CompareStructureViewerSwitchingPane
+ $4.class
+SHA-256-Digest: Dc7kkvtbSY9YcTln9iGoC3A3eCO1dyBjEX3Wm1qeqgk=
+
+Name: org/eclipse/compare/contentmergeviewer/TextMergeViewer$37.class
+SHA-256-Digest: xzyTxFzsYYSZCNSI4lrpOU2jY49psmRKPVEhCQcRmnk=
+
+Name: org/eclipse/compare/internal/Policy.class
+SHA-256-Digest: R51fZHZ+/hPHsl4guwsJbxsByip7Ae3SP+91HNAL35g=
+
+Name: org/eclipse/compare/internal/TextEditorPropertyAction.class
+SHA-256-Digest: pNfoMSzvg77XQ8/pegz2mHl8opbSoIuNXj1nym/pJOI=
+
+Name: icons/full/etool16/conflict_edit.gif
+SHA-256-Digest: 698UbMWJOgmdn1LX8G643YpWvF5MGEjf4dRT7bm38SI=
+
+Name: org/eclipse/compare/CompareEditorInput$12.class
+SHA-256-Digest: FwkrgLsUqpu2BtOcBmZJhlL8hXUUIs7hiGrl9mTzJsg=
+
+Name: org/eclipse/compare/EditionSelectionDialog$3.class
+SHA-256-Digest: btAsx5AXCMwCDxFrJoBL6R+0CCWd1wR09J+o7b3Qz2s=
+
+Name: org/eclipse/compare/HistoryItem.class
+SHA-256-Digest: 2jGeWfDbaPVF4iya2Mhq2hf2PCV/ib7xvHNVDqkjzdw=
+
+Name: org/eclipse/compare/internal/ComparePreferencePage$3.class
+SHA-256-Digest: exzsND4I9Nciv5TSr2kAvaFdFsYSw6R+TwkC6TlQEXI=
+
+Name: org/eclipse/compare/CompareEditorInput$15.class
+SHA-256-Digest: d48WCkf13jthh7HQZyvdBGrKPeiAEjCfWTYWhmDdjTk=
+
+Name: org/eclipse/compare/internal/patch/RetargetPatchElementDialog.cl
+ ass
+SHA-256-Digest: t7zR2UA1kUlPP5gFNEe80ENi94SQUXzyFWbcn3tf2cs=
+
+Name: icons/full/elcl16/ancestorpane_co.gif
+SHA-256-Digest: LyTNwHlBwjV0Guw1mh3B93laHATtatwVjyK4V0oNsEY=
+
+Name: org/eclipse/compare/internal/CompareUIPlugin$2.class
+SHA-256-Digest: ov4HNBsrjXHjOQR+L0l4IT7wbsyfuRiyRAx55IEQZ5E=
+
+Name: org/eclipse/compare/structuremergeviewer/StructureDiffViewer$8.c
+ lass
+SHA-256-Digest: ArxBDzCybw9v5CmleerwAJFR11y4gI7cJFEVmaKXbyw=
+
+Name: org/eclipse/compare/internal/CompareMessages.class
+SHA-256-Digest: 0m3FR0MFVTE/jOcdTfOcuWi/6dwKwUpsWGKIntC2y0U=
+
+Name: org/eclipse/compare/internal/BaseCompareAction.class
+SHA-256-Digest: WgSiR+HGYyiNYmofU0VhzJGugnpWpDUlsu6BJewaArc=
+
+Name: org/eclipse/compare/internal/CompareContentViewerSwitchingPane$4
+ .class
+SHA-256-Digest: ZJcy+ZcRYpUNflyA57xoR+AyEg6py5XcKZKIx6TVnnQ=
+
+Name: org/eclipse/compare/internal/CompareResourceFilter.class
+SHA-256-Digest: QGuNbaUBpxKIjBUO71DyEz5l9GBlHKatdCNNp7rg9cs=
+
+Name: org/eclipse/compare/internal/patch/PatchDiffNode.class
+SHA-256-Digest: 63CF/QMw0VccJZHJ/0Wvc60L0OlHn1gfelEjezEN68g=
+
+Name: org/eclipse/compare/contentmergeviewer/TextMergeViewer$11.class
+SHA-256-Digest: PMYEq7toTleS77d+qDauj3B3DULFsHB6LQZFhIF6x+w=
+
+Name: org/eclipse/compare/IEditableContent.class
+SHA-256-Digest: STcXE4DWgu6VJlAonLXvFz/EELaYO2JiS5qZbcJEG3w=
+
+Name: org/eclipse/compare/internal/CompareFilterDescriptor.class
+SHA-256-Digest: +Tb1hxOtgs/3q6Wr2iJ67hAWjflVMo0rLIsK6OksHjU=
+
+Name: icons/full/ovr16/error_ov.gif
+SHA-256-Digest: iiyTDHy3r4F6/pRQ4NF8TlV4o7C1RGg/nKSpfDc7vKw=
+
+Name: org/eclipse/compare/internal/TextMergeViewerCreator.class
+SHA-256-Digest: SVobU1iczXZZd4afhS/2vnvv/NjM13rfT+8KtZAF2uY=
+
+Name: org/eclipse/compare/internal/NavigationEndDialog.class
+SHA-256-Digest: JjTe4moum7rIYjZ0gT0GN0Y/ZtdH1mfR2JG7HM7NZ3s=
+
+Name: org/eclipse/compare/internal/patch/PreviewPatchPage2$12.class
+SHA-256-Digest: q+7lxOiAEqtX+j7iSxZiXKpsd6C/qXyGKxw3gcS0rLI=
+
+Name: icons/full/elcl16/smartmode_co.gif
+SHA-256-Digest: RO/pnct7gmSunqJq03Xgk62TCMW9iwyw0/ZClHLhfnA=
+
+Name: icons/full/ovr16/outadd_ov.gif
+SHA-256-Digest: lCec2QPYCMOxpr0HtdMU55y2az3XfzUgapT7xL5hB/8=
+
+Name: org/eclipse/compare/internal/CompareEditor.class
+SHA-256-Digest: xFpMLgtO8gKsUOnxOCU/5pJstAhyiD/ivBIOD2lViZ8=
+
+Name: org/eclipse/compare/internal/CompareContentViewerSwitchingPane$6
+ .class
+SHA-256-Digest: oU0hhP42eaTe5ktKbh2K2eiTug78BbjvOlqlBcjJu64=
+
+Name: org/eclipse/compare/contentmergeviewer/TextMergeViewer$40.class
+SHA-256-Digest: lTGxrYMFL8NmFizHLr9o8qYeFn9CdI43XwbhhOOa/Xo=
+
+Name: org/eclipse/compare/internal/CompareStructureViewerSwitchingPane
+ $2.class
+SHA-256-Digest: IGVpQq3/Clhf+GG/+eOZnHojYGgOTco3TcTdFsZAXrc=
+
+Name: org/eclipse/compare/internal/ShowWhitespaceAction.class
+SHA-256-Digest: o7XFYnrcFQo/O+OAQovrEN4LguDhCP87lWhslgiEFMU=
+
+Name: org/eclipse/compare/internal/IFlushable2.class
+SHA-256-Digest: TOXFMYex2uoYQnLUexVK2Jk/uP7Ynx/5JTrwdyUK2vc=
+
+Name: org/eclipse/compare/internal/patch/InputPatchPage$ActivationList
+ ener.class
+SHA-256-Digest: hnMSRjZgrDlxalHtfCVJi/x4+Qq2l6pmtKfcHv90njc=
+
+Name: org/eclipse/compare/internal/CompareContentViewerSwitchingPane.c
+ lass
+SHA-256-Digest: ZTeLBG1zuV04pN/sOl6rHSwQnN76FmAPNu9ht7Ff+0g=
+
+Name: org/eclipse/compare/internal/merge/MergeMessages.class
+SHA-256-Digest: hbUjuISrt+Bx06TabV/jlQzbDqHLZg39gNgPSmOh4uc=
+
+Name: org/eclipse/compare/EditionSelectionDialog$Pair.class
+SHA-256-Digest: x7kO4yKmTvpy05fnxdBKUzJdX2/QvG7F193XSFLOyGU=
+
+Name: org/eclipse/compare/structuremergeviewer/DiffContainer.class
+SHA-256-Digest: h3HsE33lRwY+FRULIV6Nj/jAVvyQQfSlnir76pxWMcU=
+
+Name: org/eclipse/compare/internal/DiffImageDescriptor.class
+SHA-256-Digest: esTwfN9UCx5UfVEvJ5IMvyc4zRSY5XaPjMdi9Uq62PE=
+
+Name: org/eclipse/compare/internal/DocumentManager.class
+SHA-256-Digest: lnwcftuNZHGUopild+RnBP4dtJdtduDfft9LCM/CUl0=
+
+Name: org/eclipse/compare/structuremergeviewer/StructureCreator$2.clas
+ s
+SHA-256-Digest: oXSxH3PDlSGvQpccyZvde8RymfVWSsixPTCzdCn6BHw=
+
+Name: org/eclipse/compare/internal/BufferedCanvas.class
+SHA-256-Digest: IvqmbLS6REWTDKj9iXTubAy3c3mGULDDEEo7cVoCSPQ=
+
+Name: org/eclipse/compare/internal/patch/InputPatchPage$6.class
+SHA-256-Digest: PY00Qmvhle3FyqCqbTS8oB8H0vppUgBM6KchX7MQlrU=
+
+Name: org/eclipse/compare/contentmergeviewer/TextMergeViewer$35.class
+SHA-256-Digest: +v5TqVU4xDulZ/UOQ5eqG/9RFh/OCvZoV7F3KJQH58M=
+
+Name: org/eclipse/compare/CompareViewerPane$1.class
+SHA-256-Digest: g9dyUUtv3c67/lrkl+Gk9GspBnyPfpvxSxIBFWytZBw=
+
+Name: org/eclipse/compare/internal/patch/InputPatchPage$1.class
+SHA-256-Digest: yyPrwdrXZy28vKErmEncnQ/w+etOrtsWLj5oLgyYR8E=
+
+Name: org/eclipse/compare/internal/CompareHandlerService.class
+SHA-256-Digest: 1Xm8BwbjWL3gpmpckvrTemXpb2LzttoN4zauHmCGjrM=
+
+Name: org/eclipse/compare/internal/ComparePreferencePage$1.class
+SHA-256-Digest: GQMv4WHZnADu/bhadkYOdIFrAImEna/okEPU8oWlqK4=
+
+Name: org/eclipse/compare/internal/OverlayPreferenceStore$TypeDescript
+ or.class
+SHA-256-Digest: R5twl1/FvmQUiCGlxwXnzUpmoCAwDDaUsdjQ6HELiWw=
+
+Name: icons/full/ovr16/confadd_ov.gif
+SHA-256-Digest: X6SalTkK7Du27VuOgj8I4y0HLllSFdQuWcSWdH/PC+A=
+
+Name: org/eclipse/compare/internal/ComparePreferencePage$FakeInput.cla
+ ss
+SHA-256-Digest: YMGc1hLmGplutsAr3S2Mg67+ZuxwzpbZXn2XQXltdcY=
+
+Name: org/eclipse/compare/CompareEditorInput$5.class
+SHA-256-Digest: faCQ18fI4HOuuVK/7Veu0s22SN+ogxdLCCIKognaluo=
+
+Name: org/eclipse/compare/contentmergeviewer/TextMergeViewer$2.class
+SHA-256-Digest: GgpQ4qV60ajM/oalyEhZntn10E8idWFemQqJZk2W+e0=
+
+Name: org/eclipse/compare/internal/MergeSourceViewer$TextEditorAdapter
+ $1.class
+SHA-256-Digest: xIChEjBwxqEMqhmZrd08FYHiuui0VRDQnRwXaFlM8tE=
+
+Name: org/eclipse/compare/structuremergeviewer/DiffTreeViewer.class
+SHA-256-Digest: nJCLb8j9Lw+qBwjJbsyOUrkq0W1wdH9y/AlkD7LLlfY=
+
+Name: org/eclipse/compare/internal/CompareContentViewerSwitchingPane$6
+ $1.class
+SHA-256-Digest: NnVo8+rs/CuhZihr6yoX+5EnkTO2idJ4OF5eE4S6B8M=
+
+Name: org/eclipse/compare/internal/ResizableDialog.class
+SHA-256-Digest: HBdcjrJspn6/s0ifiCwrQPI9JZbSiFhsA9Xv3gmvMEU=
+
+Name: org/eclipse/compare/internal/BufferedCanvas$2.class
+SHA-256-Digest: mByRv4VQOPvGH6yIHrkN7n9wCwMXljADD6S9Z7yQouw=
+
+Name: org/eclipse/compare/internal/CompareWithOtherResourceDialog$File
+ TextDropListener.class
+SHA-256-Digest: n6RDM8ZaHNTos9hcE//+cTXegbuGVpMk8RlHj8FXP4E=
+
+Name: org/eclipse/compare/internal/AdapterFactory.class
+SHA-256-Digest: 8RxB+lyMLfviX96FMsOjeKtQCzupORl4uU8P6aeC9RU=
+
+Name: org/eclipse/compare/internal/merge/DocumentMerger$2.class
+SHA-256-Digest: Qli5JT8Vr5y7VHyo3s6l+s9u8RGhb4bFtGCadXaVH+Y=
+
+Name: org/eclipse/compare/contentmergeviewer/TextMergeViewer$39.class
+SHA-256-Digest: dssq7DlCWD1NpQqf6vLt1/+0NUCj018oBwSFWiKcnOc=
+
+Name: org/eclipse/compare/structuremergeviewer/StructureCreator$1.clas
+ s
+SHA-256-Digest: pjmeRxT27+XTmPVSKxwdC8uI3jpsDG4SW0r/EipLEPQ=
+
+Name: org/eclipse/compare/internal/CompareEditor$2.class
+SHA-256-Digest: hqu93NsbnujRTOLs1IA8zfjeHxgw55tObSWn1InFNTg=
+
+Name: org/eclipse/compare/ZipFileStructureCreator$ZipResource.class
+SHA-256-Digest: 5Q6eiXat4h9z7Q+XzMrKtNvHjjAiDs9zDE72y1vg5ZA=
+
+Name: org/eclipse/compare/internal/Utilities$2.class
+SHA-256-Digest: gmfwlxypA2tYTTV6iPqgtFw/LWIEXvqPoceFD3z01VI=
+
+Name: org/eclipse/compare/internal/patch/PatchCompareEditorInput$5.cla
+ ss
+SHA-256-Digest: ykeKvGjQJjmy9WNQ0Jy2BtYYlBeLUUlkWHuSxFuI62A=
+
+Name: org/eclipse/compare/internal/AddFromHistoryAction$1.class
+SHA-256-Digest: gQu87QJDgk7tOpHMVl+5I7NQWkJxg+4n9H4T3itqOCQ=
+
+Name: org/eclipse/compare/internal/patch/PreviewPatchPage2$16.class
+SHA-256-Digest: b5dpcO1mWUNr56r9Omn7RkudvsXVgWRuiXD5luSq40U=
+
+Name: org/eclipse/compare/IEncodedStreamContentAccessor.class
+SHA-256-Digest: 9Gs27sX9acWh+sgQMCHYfo15ez/J/LkUZHb9doNPd5w=
+
+Name: org/eclipse/compare/internal/merge/DocumentMerger$Diff.class
+SHA-256-Digest: 4LOog72uMzqzjYoXtX7jquu2uWGAZi1z4VLPP/lsVAM=
+
+Name: org/eclipse/compare/IResourceProvider.class
+SHA-256-Digest: 4dUZEVmUVpeabtjeKkBMZyM2mv0umGNgTrQcmJMRg7Y=
+
+Name: org/eclipse/compare/structuremergeviewer/StructureDiffViewer$1.c
+ lass
+SHA-256-Digest: d+ET9LNtFXc7hP4LNummFsxIVEPn9MPRkOTCj3Q2958=
+
+Name: icons/full/dlcl16/smartmode_co.gif
+SHA-256-Digest: +dTd09PCzaQF3F3Lk+YD2MmOC9G6Gz9rePH72MzssPA=
+
+Name: icons/full/ovr16/outchg_ov.gif
+SHA-256-Digest: ftkLlEWKy02k4L5Ic3qVDPVxff1AhQVcMtJOD+f0rZ0=
+
+Name: org/eclipse/compare/internal/patch/PatchCompareEditorInput$Patch
+ erCompareEditorLabelProvider.class
+SHA-256-Digest: hxKLB72knIdKFWvhRuaiGYSG/KSMDyo9hynMFNtMsEg=
+
+Name: org/eclipse/compare/internal/AddFromHistoryDialog$HistoryInput.c
+ lass
+SHA-256-Digest: EV5JVPOn4QmmG4YhmcVAtDaoIKH3bZToancm0zblggc=
+
+Name: org/eclipse/compare/internal/MergeSourceViewer.class
+SHA-256-Digest: cSGzVHZhOnKv/1F22JUz3jZGYY4DGxgaxBmtBXWxw2E=
+
+Name: org/eclipse/compare/contentmergeviewer/ContentMergeViewer$3.clas
+ s
+SHA-256-Digest: oXUd4+nnQmGDvlC598SAHPfLzBUpEXxJ2SDagRIpbTY=
+
+Name: org/eclipse/compare/internal/patch/PreviewPatchPage2$4.class
+SHA-256-Digest: mlO8uOlXi2BtoIHDR8wQMMg6WWYwScOeaPygVaxvN4c=
+
+Name: org/eclipse/compare/ResourceNode.class
+SHA-256-Digest: V7I6oDDBdlOO5JZrm/upADiwKOf5ANqfcSh5T1xQfrI=
+
+Name: org/eclipse/compare/internal/AddFromHistoryDialog$2.class
+SHA-256-Digest: NXbjfpSTGZKSvK7YmskX/B+2dF9yBgAn2uXtJG0QA2w=
+
+Name: org/eclipse/compare/structuremergeviewer/StructureDiffViewer$11.
+ class
+SHA-256-Digest: M5TQX+ZnAH2wzl690wmlC0m/QbaQzuuN3JUuSEz4BTk=
+
+Name: org/eclipse/compare/internal/CompareOutlinePage$1.class
+SHA-256-Digest: T0BK/J/cmkP7fJuD5hRoHbY19OD/3kYj3E/58xTmeqA=
+
+Name: org/eclipse/compare/structuremergeviewer/StructureDiffViewer$7.c
+ lass
+SHA-256-Digest: soE6bJCTtReyETHjviUWjERfcqKUh8h+MWc1IJH5S3Y=
+
+Name: org/eclipse/compare/contentmergeviewer/ContentMergeViewer$2.clas
+ s
+SHA-256-Digest: +0XdlvLAY8jFHCk6Mi4pO41RqFiwUil3DmO7RGO61po=
+
+Name: org/eclipse/compare/internal/NullViewer.class
+SHA-256-Digest: hGYCCf6zyran45q+cHNrpiajt+YEOsKQaMtZrdH5vTQ=
+
+Name: org/eclipse/compare/internal/merge/DocumentMerger$1.class
+SHA-256-Digest: VRhOSYo15SU95oRiuRbk0LUicUE4EIFU9aV4UO+Q3WM=
+
+Name: org/eclipse/compare/internal/MergeSourceViewer$1.class
+SHA-256-Digest: T9ZLLLWSj5yKAxKj+4/7EyBUorjvsvzc1HwxGSPylxM=
+
+Name: org/eclipse/compare/structuremergeviewer/DiffTreeViewer$FilterSa
+ me.class
+SHA-256-Digest: 069go8QkLoMb5ULrmM+sLCvR5XN2tSnWjN74/Ft+XSQ=
+
+Name: org/eclipse/compare/internal/patch/PreviewPatchPage2.class
+SHA-256-Digest: gixszyt+BzaC/qEb3biNCKrHkVZW6nptIxygc3b/lWA=
+
+Name: org/eclipse/compare/internal/OutlineViewerCreator.class
+SHA-256-Digest: wFtQBkJGsRU+heWLW22oxoKLKfkLu3denyMbEm3oXvw=
+
+Name: org/eclipse/compare/contentmergeviewer/TextMergeViewer$38.class
+SHA-256-Digest: H0IGKrbmk0HxbYT282AOl+33cVBInhshGEN5sXf362Y=
+
+Name: org/eclipse/compare/internal/CompareEditor$3.class
+SHA-256-Digest: HJOlKsCITDTntBk1AdQqDhdvQzZtGN5EE8RH3ia5tr4=
+
+Name: org/eclipse/compare/internal/patch/PatchCompareEditorInput$4.cla
+ ss
+SHA-256-Digest: Jz6QsF1AaXkDtETHlFvKrXbLTbjaxmV3cWe/KulgPQM=
+
+Name: org/eclipse/compare/internal/Utilities$1.class
+SHA-256-Digest: IRbkI5ybuUXmIOC6/1vdZQKzyc8vLpKwYcjLchssMqQ=
+
+Name: org/eclipse/compare/contentmergeviewer/TextMergeViewer$1.class
+SHA-256-Digest: nOVZfUiT1EDJOvaO9uF3Q668oA1iDehgRpHEbiDlYFg=
+
+Name: org/eclipse/compare/CompareEditorInput.class
+SHA-256-Digest: 431BwkNHtk8vAAQlIR1jlZrcp26bVTh5+26W/ogzMXM=
+
+Name: org/eclipse/compare/INavigatable.class
+SHA-256-Digest: 123WjetJGpcRpr3B484g5Pd9jYACzFNCq1AjeynSNrQ=
+
+Name: org/eclipse/compare/internal/patch/PreviewPatchPage2$15.class
+SHA-256-Digest: L0lFv3TVjjPZyV/eGCs8o4r1DGJUuM/29hYQGT7JKIk=
+
+Name: icons/full/elcl16/next_nav_into.gif
+SHA-256-Digest: bOxiwVcfzLokFRtwUPNBGQo/siVdDX+U5XoTlG7uc/U=
+
+Name: org/eclipse/compare/internal/CompareFilterDescriptor$1.class
+SHA-256-Digest: 2URlVdBtydw+zi9XU4pX00IF6ij70zTrdcxJUmbvIUk=
+
+Name: icons/full/ovr16/r_outchg_ov.gif
+SHA-256-Digest: QMI99nsb/vxqnsU4wvCHUYsTFzsVaMFF9qUyubD+wJ8=
+
+Name: org/eclipse/compare/contentmergeviewer/TextMergeViewer$7.class
+SHA-256-Digest: cPOLUR01G7GF7fdoEGxE73RKAmsBZpMmeZwUKYYFuZg=
+
+Name: org/eclipse/compare/internal/MergeSourceViewer$2.class
+SHA-256-Digest: uzXPcOCV0rIviaQF1olfNMkjKY52mHYiNWAY02N2qtQ=
+
+Name: org/eclipse/compare/internal/patch/PreviewPatchPage2$5.class
+SHA-256-Digest: ZeURtcla5kvHjeXB/xgnrRe6S1J4dbxozJXPpBq+29k=
+
+Name: org/eclipse/compare/structuremergeviewer/StructureDiffViewer$6.c
+ lass
+SHA-256-Digest: J/VIXcX2jV4nxzYzQzmfda5WT7zolvUz13ZmBicgjPc=
+
+Name: org/eclipse/compare/contentmergeviewer/ContentMergeViewer$Resize
+ r$1.class
+SHA-256-Digest: X/eGwHiOYEHeq8YBN1TSpKfZfGcpSiGt4oEUamQEtDI=
+
+Name: org/eclipse/compare/CompareViewerPane$2.class
+SHA-256-Digest: 6gH9uvvH5mloBLAkORwHFsFUas1PHo+hqpto5IExts4=
+
+Name: org/eclipse/compare/structuremergeviewer/StructureDiffViewer$12.
+ class
+SHA-256-Digest: HjNXCH4HdKXZ6X549TJSjViFXDPOeOWokEXcndltA0o=
+
+Name: org/eclipse/compare/internal/patch/InputPatchPage$2.class
+SHA-256-Digest: Rsd9eSg0ddCgz6gvBHVCXPpekxVAEu06ECa34A/LmX0=
+
+Name: icons/full/ovr16/inadd_ov.gif
+SHA-256-Digest: YR8rJrnK8UcL3Z1B9ZmCC9BouLoZubvle/r5+1b0CuA=
+
+Name: icons/full/elcl16/copycont_r_co.gif
+SHA-256-Digest: s7Mp4ow3jnf8MkJX2wgll+ONFJBrdw/5YIY8eBK/1GU=
+
+Name: org/eclipse/compare/internal/patch/HunkTypedElement.class
+SHA-256-Digest: O7STEKy/BFHJIFslreJ5tkNt5fTEEArb2KWoOIEa4mc=
+
+Name: org/eclipse/compare/contentmergeviewer/TextMergeViewer$8.class
+SHA-256-Digest: 9JT8yzSl5G2gAjG8X5cWZeOJ3KjZ9v5BeBTBW3fyh8g=
+
+Name: org/eclipse/compare/internal/CompareStructureViewerSwitchingPane
+ $5.class
+SHA-256-Digest: 9kDIhr7g71mFFKdp6qseRlPt2sgayXAHxKqam5Ah8NI=
+
+Name: org/eclipse/compare/internal/patch/Patcher$IFileValidator.class
+SHA-256-Digest: nWYQX7UjKyvQZud/GqI1toBPjUVqCe/kLZB6oMRmRxE=
+
+Name: org/eclipse/compare/internal/BufferedCanvas$1.class
+SHA-256-Digest: 0/Fel6I4xfw59Lg8/vKyLVuukdjao0M7GYn7V8V1maE=
+
+Name: org/eclipse/compare/internal/Policy$1.class
+SHA-256-Digest: 3YFJzSRM+0EFeVYVsLFrCHUZghv2OkhhPjewVTPZWtI=
+
+Name: icons/full/ovr16/warning_ov.gif
+SHA-256-Digest: sVRgDg7+jRT78AjUaklYIlGoPjUGsTrtrSbr90EGdtY=
+
+Name: org/eclipse/compare/structuremergeviewer/IStructureCreator.class
+SHA-256-Digest: Ovjd6QLgPELLww3rSu7BLo/+gOb/8NqL9sUYUpuKgZY=
+
+Name: org/eclipse/compare/internal/CompareEditor$EditorCompareContaine
+ r$1.class
+SHA-256-Digest: 75Lwod/wyyPXarEoPu1H9bdzKlOsf8caDLyR4ddHMBg=
+
+Name: org/eclipse/compare/contentmergeviewer/TextMergeViewer$6.class
+SHA-256-Digest: WUFgfIBp8Hb3mfpX7D5OIM4OkgMgrSKNsPJtpF3QH1k=
+
+Name: org/eclipse/compare/structuremergeviewer/StructureDiffViewer$2.c
+ lass
+SHA-256-Digest: K9D7i3UVUlIDm193BkrdRSzgsK75cM6B1CXMjRhYf1I=
+
+Name: org/eclipse/compare/internal/patch/PatchProjectDiffNode.class
+SHA-256-Digest: 5b1TEtzQ4LXwwBdYk1oxrZTT9R0ZRLLRD2uvb50GB0U=
+
+Name: org/eclipse/compare/structuremergeviewer/StructureDiffViewer$5.c
+ lass
+SHA-256-Digest: z4GlBZ5c/XfsLEKNs6MCwtmweYe7lUUXLvuqWmpOaAs=
+
+Name: org/eclipse/compare/contentmergeviewer/ContentMergeViewer.class
+SHA-256-Digest: BNSRFxiImgYmc7/rk8hoKjsMZO1lcTMnvhHozgfs1zc=
+
+Name: icons/full/obj16/day_obj.gif
+SHA-256-Digest: FHIIVJ9y1NjzKGQBWNiQiQyrGw5IyJDB2hI9MD6oDis=
+
+Name: org/eclipse/compare/structuremergeviewer/IDiffContainer.class
+SHA-256-Digest: PsThdk4JUA+OEh218ZINCZgdyBI+JtgwX84ogKDM1Uw=
+
+Name: org/eclipse/compare/IStreamContentAccessor.class
+SHA-256-Digest: M0vEapP8byWVMv66i1kTwPV9K+g1X0duYTRTR0HJlys=
+
+Name: plugin.properties
+SHA-256-Digest: GqTGCmtqG7fCKBeaC38zZCjafZBytyTdjbRfvgJZkuw=
+
+Name: org/eclipse/compare/internal/AddFromHistoryDialog$3.class
+SHA-256-Digest: djWp4944tMguFaMfNn3rzHph5tY2U1IDiadkv4PoS+A=
+
+Name: org/eclipse/compare/Splitter.class
+SHA-256-Digest: Q7DDCTEkoxUhzWob1YV6S7vYWhgzZ7N2EPoQWQqpNts=
+
+Name: org/eclipse/compare/structuremergeviewer/ICompareInputChangeList
+ ener.class
+SHA-256-Digest: f/OikgpdKBbhmSckxmMUP5W/14aZ42FP8TxBuxen/8k=
+
+Name: org/eclipse/compare/internal/Utilities$3.class
+SHA-256-Digest: zqPdmt0gORPjaJxrmZMciAok25VtuLXWLX3TNFypUe4=
+
+Name: org/eclipse/compare/internal/CompareEditor$1.class
+SHA-256-Digest: ZCUT4gRItP9IC/SZmS20ahYL2ueeoYdSl98weBo6Cz8=
+
+Name: org/eclipse/compare/internal/patch/PreviewPatchPage2$17.class
+SHA-256-Digest: K2ZI1bozCOm754J5lQ4NJN6xHVHrOb0zCuhuoAjuYeE=
+
+Name: icons/full/dtool16/conflict_edit.gif
+SHA-256-Digest: PjfLW15Lz/nOKKeoCoXngHn6vTD8ihUAvwIS8fDXRdY=
+
+Name: org/eclipse/compare/internal/ExceptionHandler.class
+SHA-256-Digest: thfawEBYRkiad3/o3WUNelXeEJ445FDiXMX237WNE1I=
+
+Name: icons/full/ovr16/r_outdel_ov.gif
+SHA-256-Digest: MjTVzS8ciVMKXYHQE7Ve/NV7sH9CFvGJKurYHKfZBfM=
+
+Name: org/eclipse/compare/ICompareFilter.class
+SHA-256-Digest: D6LgoPlOdp9vDSS4waV0aCAZFDXpEcf07vAant/DScQ=
+
+Name: icons/full/dlcl16/prev_nav.gif
+SHA-256-Digest: gNzstVqevKQmeCzXZi1ifXIClAPoAewdUiFHyPR2iNk=
+
+Name: icons/full/elcl16/twowaycompare_co.gif
+SHA-256-Digest: G/2ZNhuB1ea6cyVn2YfkNxmzMg9u049rlECwSwUqpis=
+
+Name: org/eclipse/compare/internal/ChangePropertyAction.class
+SHA-256-Digest: 2RRouFZal6k9DSKLwxcVzjQ6HVvEK+swsTl38R0nS44=
+
+Name: org/eclipse/compare/internal/EditionAction.class
+SHA-256-Digest: 5OPUQl5TAa7tVeMd6xtD3Gek47Nv7c1+EtKKk46gN+0=
+
+Name: org/eclipse/compare/structuremergeviewer/StructureDiffViewer$Str
+ uctureInfo$1.class
+SHA-256-Digest: E3eYjohe1Z52q1PF/Y7//AnDHVXvsBlyr4zsPq9e+Es=
+
+Name: org/eclipse/compare/internal/patch/PatchMessages.properties
+SHA-256-Digest: w/oDSzoEVCgJ27Qj67EUxyeUpHr9w99TtV5ldhfEK4g=
+
+Name: org/eclipse/compare/CompareEditorInput$4.class
+SHA-256-Digest: KZvNzltw5CVAr60btBYqF+m9CicjzNCllFZjlkLmP9M=
+
+Name: org/eclipse/compare/CompareEditorInput$7.class
+SHA-256-Digest: zceR4BIBNZRixXYu8gyGFpI16Dp2XC1UMm3e1NGEzdw=
+
+Name: org/eclipse/compare/structuremergeviewer/DocumentRangeNode.class
+SHA-256-Digest: D72yg3LfEgwd4odWhICTsVJKsZ8HPyA6liGlZO5TWLE=
+
+Name: org/eclipse/compare/CompareViewerPane$3.class
+SHA-256-Digest: 5pD3YBRyoopFjIn1iuPRpctk891yV31HkELBbE0T9E0=
+
+Name: org/eclipse/compare/contentmergeviewer/TextMergeViewer$ChangeHig
+ hlighter.class
+SHA-256-Digest: h32C9hPIG02HMH/hZufkoTg3iMNyMlV1y7yOtsETA0o=
+
+Name: icons/full/elcl16/prev_nav.gif
+SHA-256-Digest: wBXug2bm4/8nbd9/YZRoWrtVqAG9d37QF/lmuvHtDMI=
+
+Name: org/eclipse/compare/contentmergeviewer/TextMergeViewer$3.class
+SHA-256-Digest: UIFP/U+M5ogsQzIQaomU0F1d7Kvpl+1obvNY1nOj/+E=
+
+Name: icons/full/dlcl16/copy_r_co.gif
+SHA-256-Digest: v+E83Hvglm5F/xn/gCBUnCqprBHMWjI64MTliDSdbL4=
+
+Name: org/eclipse/compare/internal/patch/UnmatchedHunkTypedElement.cla
+ ss
+SHA-256-Digest: BnRvONqhjcWI43L452SMoaL8XEZXGyFsQLgDbZb+qhg=
+
+Name: icons/full/dlcl16/ancestorpane_co.gif
+SHA-256-Digest: Tcmro3dWix29zPpJH8vLJ4L6k9x1sMflWzJc57OcRM0=
+
+Name: org/eclipse/compare/internal/patch/RetargetPatchElementDialog$2.
+ class
+SHA-256-Digest: TUfq3zwC75VnWWYSSZ9TAxd7hXAMwyUnsr4VsFcuWwM=
+
+Name: org/eclipse/compare/contentmergeviewer/TextMergeViewer$4.class
+SHA-256-Digest: N/RBSbYZ1W+rlBj5CJ7tdZFjY7/9WsecZLeZQAAVVlw=
+
+Name: org/eclipse/compare/internal/MergeViewerAction.class
+SHA-256-Digest: tax9ARoKUA525uJm1PHg1mGbHjeMLeQv9csZmxiNhOo=
+
+Name: icons/full/ovr16/del_ov.gif
+SHA-256-Digest: 3RI88dYkMzih6Un6VgxtldU2ksZeJ5Psq2wB3lnU9Ek=
+
+Name: org/eclipse/compare/internal/EditionAction$DocumentBufferNode.cl
+ ass
+SHA-256-Digest: qK0n36tl+GOHPhyOGz1WtDCTS5kKeW840h0RFPvxgno=
+
+Name: org/eclipse/compare/internal/CompareWithOtherResourceDialog$Work
+ spaceContent$2.class
+SHA-256-Digest: BTFa/y9OpNyIfzsuPCm+30a9uRJYuCjmZ4hRp3J4q+0=
+
+Name: org/eclipse/compare/structuremergeviewer/StructureDiffViewer$4.c
+ lass
+SHA-256-Digest: GddxPyjT52B4GyYwKwj7rfaAt1mqFuwa05GNGEZcFFk=
+
+Name: org/eclipse/compare/internal/patch/PreviewPatchPage2$19.class
+SHA-256-Digest: sP43gwBChXGBJhBbyx9H4mgpaErdeVg4PmDsSGF97W0=
+
+Name: org/eclipse/compare/internal/patch/PreviewPatchPage2$2.class
+SHA-256-Digest: 76C78lVxppgwluQJr5THXLdiO5ogjszlfPS0HSTQceM=
+
+Name: org/eclipse/compare/CompareEditorInput$6.class
+SHA-256-Digest: 15lXRhyyKZE0h+7hTeO4F+deUpslyFMF/WHPBen3AL8=
+
+Name: org/eclipse/compare/internal/patch/PreviewPatchPage2$3.class
+SHA-256-Digest: +2FtS1sSmryeWHF0ESL7rHtJCXxLLE3Okoc9gb8xe+Y=
+
+Name: org/eclipse/compare/internal/CompareDialog$DialogCompareContaine
+ r.class
+SHA-256-Digest: FW5vnqQVnAt00xOeb8AZwk8m2ScDLDogeDkfLUe9lwU=
+
+Name: org/eclipse/compare/internal/CompareAction.class
+SHA-256-Digest: 5ccz3rcmX5bIbt3FcnbxbmttfQAeXz6Ye++szz78rzQ=
+
+Name: org/eclipse/compare/internal/patch/DiffViewerComparator$1.class
+SHA-256-Digest: CGqsrMkPwuS13e9WXSSdmpXA3rGzOV1SWt6rZ8OVIOY=
+
+Name: org/eclipse/compare/internal/CompareEditor$EditorCompareContaine
+ r.class
+SHA-256-Digest: AMAC1W+dAYOdC8wjngx10+33nilmfPXhnKWDeHecSrA=
+
+Name: org/eclipse/compare/internal/CompareWithOtherResourceDialog$Exte
+ rnalFileContent$1.class
+SHA-256-Digest: 3R+ZZbDBQdeYrZrVLM7Z8kjj5h2iJhJw83fNWNPe5lI=
+
+Name: about.html
+SHA-256-Digest: 0RM1x9lTJa7T8YkysaegPuBIeaEvSZypRDfXoMpsJAU=
+
+Name: org/eclipse/compare/internal/CompareEditorSelectionProvider$Inte
+ rnalListener.class
+SHA-256-Digest: JGXuY/NANGIfe44ibTMGGC5aIyFGuF/UdSPWPqMpMsQ=
+
+Name: org/eclipse/compare/internal/ImageMergeViewerResources.propertie
+ s
+SHA-256-Digest: /EBgF/L3rlABFzIpzZuLDV9OoHuujwlcOR3ZrLHbiQY=
+
+Name: org/eclipse/compare/structuremergeviewer/StructureDiffViewer$10.
+ class
+SHA-256-Digest: /2gKANrWPmNLJUrEE0uTzb8YWJAPqtEM96+0Z0F+0Bs=
+
+Name: org/eclipse/compare/contentmergeviewer/TextMergeViewer$Contribut
+ orInfo$1.class
+SHA-256-Digest: xTD7zAqqVD4jDAoUbEVsPSzc+OTu3K5yhiKLD0W1haI=
+
+Name: org/eclipse/compare/internal/AddFromHistoryDialog$1.class
+SHA-256-Digest: MlScKG1x0ACRQgHGu/QwnRxtznR6HXNe3aGT8f4l0dE=
+
+Name: org/eclipse/compare/internal/StructureCreatorDescriptor.class
+SHA-256-Digest: 2MdjEASwv4/N8i2jP/SgaGkR6r20Xw22QfGK8N4zd44=
+
+Name: org/eclipse/compare/internal/ResourceCompareInput$SelectAncestor
+ Dialog.class
+SHA-256-Digest: u/AHRFj8xd4tI5FVJ4dBzcSgpi7bUvIdxVcmA+TM/ao=
+
+Name: org/eclipse/compare/contentmergeviewer/TextMergeViewer$5.class
+SHA-256-Digest: cpgiEbOYYGiy2ayT0zwaFCUNO5GP1aKGNiRQok47Hw8=
+
+Name: org/eclipse/compare/internal/patch/PatchWizard.class
+SHA-256-Digest: d+f0G17ELuRuHrdxeMR9tr0RYCLOYXHBqsnYlHBD4PY=
+
+Name: org/eclipse/compare/contentmergeviewer/ContentMergeViewer$Conten
+ tMergeViewerLayout.class
+SHA-256-Digest: ZkEQ2M84rUnkICZFjyCTKiSjzKVTiLzTpMpEDA3VXTY=
+
+Name: org/eclipse/compare/internal/patch/PatchCompareEditorInput.class
+SHA-256-Digest: wDx96u4qoFSEwp6DfrEhge4c7/hZ4tGyKZWFhiBaMWw=
+
+Name: icons/full/elcl16/copycont_l_co.gif
+SHA-256-Digest: Cg07Qo8kuyoPLJzugwZJw+aOu8FM0NosXpdl1JxVv+8=
+
+Name: org/eclipse/compare/structuremergeviewer/IDiffElement.class
+SHA-256-Digest: WbLttkQZ+KJnR4nd9lpEQmby8vXZgtJWM8HCHO7asuc=
+
+Name: org/eclipse/compare/internal/Utilities$4.class
+SHA-256-Digest: OFgiWJ3xrVLiiNR/4MjOugUhiczyc908d7RUa23Oh8o=
+
+Name: org/eclipse/compare/internal/AddFromHistoryAction.class
+SHA-256-Digest: snTnVzobur9SInapFxCZOR4/v+Jd5t7dBRm1DKhNXiE=
+
+Name: org/eclipse/compare/internal/CompareWithOtherResourceDialog$Exte
+ rnalFolderContent$1.class
+SHA-256-Digest: GqqNGj7tcKmhfB+rHlWA6yoQzKza1+Ls/h5oPDpjClY=
+
+Name: org/eclipse/compare/patch/IFilePatch.class
+SHA-256-Digest: S/JLYWf2XZKxke49HL13XgFoI98azHCEMab5CAJvVNw=
+
+Name: org/eclipse/compare/internal/patch/PreviewPatchPage2$18.class
+SHA-256-Digest: V75oe/wyB6yRdcME9Ji/hxakO8CXVHujyTAhuuZYLS4=
+
+Name: org/eclipse/compare/patch/ApplyPatchOperation.class
+SHA-256-Digest: SwteeNNMrBNyqWCa9Npi5EYJnsZaqQ2w9f7srauhzXw=
+
+Name: org/eclipse/compare/internal/CompareWithOtherResourceDialog$Exte
+ rnalFolderContent.class
+SHA-256-Digest: fycfiPrdBMeW4AVhMHNCI32y0P+guOoi8s6Ihrudjnw=
+
+Name: org/eclipse/compare/internal/patch/RetargetPatchElementDialog$1.
+ class
+SHA-256-Digest: a7EUn9gqHGxO4DHqnQkipLaDh/c6bx+OVI7ZCDRBMV8=
+
+Name: org/eclipse/compare/structuremergeviewer/StructureDiffViewer$3.c
+ lass
+SHA-256-Digest: x0E/L4HGdhJZO2unD1xP3/kgcpQ6rvBiFYSw3GBlbhc=
+
+Name: org/eclipse/compare/contentmergeviewer/TextMergeViewer$HeaderPai
+ nter.class
+SHA-256-Digest: n+vibLlBJJGoPXMvcCKYXy8uLSkdNxsRb2HsVW1Q4FU=
+
