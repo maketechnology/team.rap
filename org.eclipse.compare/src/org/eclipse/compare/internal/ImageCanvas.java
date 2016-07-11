@@ -10,9 +10,16 @@
  *******************************************************************************/
 package org.eclipse.compare.internal;
 
-import org.eclipse.swt.*;
-import org.eclipse.swt.graphics.*;
-import org.eclipse.swt.widgets.*;
+import org.eclipse.swt.SWT;
+import org.eclipse.swt.graphics.GC;
+import org.eclipse.swt.graphics.Image;
+import org.eclipse.swt.graphics.Point;
+import org.eclipse.swt.graphics.Rectangle;
+import org.eclipse.swt.widgets.Canvas;
+import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.Event;
+import org.eclipse.swt.widgets.Listener;
+import org.eclipse.swt.widgets.ScrollBar;
 
 /**
  * A <code>Canvas</code> showing a single centered SWT <code>Image</code>.
@@ -31,7 +38,7 @@ class ImageCanvas extends Canvas {
 		super(parent, style | SWT.H_SCROLL | SWT.V_SCROLL);
 
 		ScrollBar sb= getHorizontalBar();
-		sb.setIncrement(20);
+        // sb.setIncrement(20);
 		sb.addListener(SWT.Selection, new Listener() {
 			public void handleEvent(Event e) {
 				repaint();
@@ -39,7 +46,7 @@ class ImageCanvas extends Canvas {
 		});
 
 		sb= getVerticalBar();
-		sb.setIncrement(20);
+        // sb.setIncrement(20);
 		sb.addListener(SWT.Selection, new Listener() {
 			public void handleEvent(Event e) {
 				repaint();
@@ -116,7 +123,7 @@ class ImageCanvas extends Canvas {
 			horizontal.setVisible(false);
 			horizontal.setSelection(0);
 		} else {
-			horizontal.setPageIncrement(clientArea.width - horizontal.getIncrement());
+            // horizontal.setPageIncrement(clientArea.width - horizontal.getIncrement());
 			int max= bounds.width + (size.x - clientArea.width);
 			horizontal.setMaximum(max);
 			horizontal.setThumb(size.x > max ? max : size.x);
@@ -128,7 +135,7 @@ class ImageCanvas extends Canvas {
 			vertical.setVisible(false);
 			vertical.setSelection(0);
 		} else {
-			vertical.setPageIncrement(clientArea.height - vertical.getIncrement());
+            // vertical.setPageIncrement(clientArea.height - vertical.getIncrement());
 			int max= bounds.height + (size.y - clientArea.height);
 			vertical.setMaximum(max);
 			vertical.setThumb(size.y > max ? max : size.y);

@@ -20,10 +20,24 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.ResourceBundle;
 
-import com.ibm.icu.text.DateFormat;
-import com.ibm.icu.text.MessageFormat;
-import com.ibm.icu.util.Calendar;
-
+import org.eclipse.compare.internal.CompareContainer;
+import org.eclipse.compare.internal.CompareUIPlugin;
+import org.eclipse.compare.internal.ResizableDialog;
+import org.eclipse.compare.internal.StructureCreatorDescriptor;
+import org.eclipse.compare.internal.Utilities;
+import org.eclipse.compare.structuremergeviewer.DiffNode;
+import org.eclipse.compare.structuremergeviewer.ICompareInput;
+import org.eclipse.compare.structuremergeviewer.IStructureComparator;
+import org.eclipse.compare.structuremergeviewer.IStructureCreator;
+import org.eclipse.core.runtime.Assert;
+import org.eclipse.core.runtime.CoreException;
+import org.eclipse.jface.dialogs.IDialogConstants;
+import org.eclipse.jface.resource.ImageDescriptor;
+import org.eclipse.jface.viewers.ISelection;
+import org.eclipse.jface.viewers.ISelectionChangedListener;
+import org.eclipse.jface.viewers.IStructuredSelection;
+import org.eclipse.jface.viewers.SelectionChangedEvent;
+import org.eclipse.jface.viewers.Viewer;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.DisposeEvent;
 import org.eclipse.swt.events.DisposeListener;
@@ -44,50 +58,29 @@ import org.eclipse.swt.widgets.Tree;
 import org.eclipse.swt.widgets.TreeItem;
 import org.eclipse.swt.widgets.Widget;
 
-import org.eclipse.core.runtime.Assert;
-import org.eclipse.core.runtime.CoreException;
-
-import org.eclipse.jface.dialogs.IDialogConstants;
-import org.eclipse.jface.resource.ImageDescriptor;
-import org.eclipse.jface.viewers.ISelection;
-import org.eclipse.jface.viewers.ISelectionChangedListener;
-import org.eclipse.jface.viewers.IStructuredSelection;
-import org.eclipse.jface.viewers.SelectionChangedEvent;
-import org.eclipse.jface.viewers.Viewer;
-
-import org.eclipse.compare.internal.CompareContainer;
-import org.eclipse.compare.internal.CompareUIPlugin;
-import org.eclipse.compare.internal.ResizableDialog;
-import org.eclipse.compare.internal.StructureCreatorDescriptor;
-import org.eclipse.compare.internal.Utilities;
-import org.eclipse.compare.structuremergeviewer.DiffNode;
-import org.eclipse.compare.structuremergeviewer.ICompareInput;
-import org.eclipse.compare.structuremergeviewer.IStructureComparator;
-import org.eclipse.compare.structuremergeviewer.IStructureCreator;
+import com.ibm.icu.text.DateFormat;
+import com.ibm.icu.text.MessageFormat;
+import com.ibm.icu.util.Calendar;
 
 
 /**
- * A dialog where one input element can be compared against
- * a list of historic variants (editions) of the same input element.
- * The dialog can be used to implement functions like "Compare/Replace with Version" or
- * "Compare/Replace from Local History" on workspace resources.
+ * A dialog where one input element can be compared against a list of historic variants (editions)
+ * of the same input element. The dialog can be used to implement functions like
+ * "Compare/Replace with Version" or "Compare/Replace from Local History" on workspace resources.
  * <p>
- * In addition it is possible to specify a subsection of the input element
- * (e.g. a method in a Java source file) by means of a "path".
- * In this case the dialog compares only the subsection (as specified by the path)
- * with the corresponding subsection in the list of editions.
- * Only those editions are shown where the subsection differs from the same subsection in
- * another edition thereby minimizing the number of presented variants.
- * This functionality can be used to implement "Replace from Local History"
- * for the Java language.
+ * In addition it is possible to specify a subsection of the input element (e.g. a method in a Java
+ * source file) by means of a "path". In this case the dialog compares only the subsection (as
+ * specified by the path) with the corresponding subsection in the list of editions. Only those
+ * editions are shown where the subsection differs from the same subsection in another edition
+ * thereby minimizing the number of presented variants. This functionality can be used to implement
+ * "Replace from Local History" for the Java language.
  * <p>
- * Subsections of an input element are determined by first finding an
- * <code>IStructureCreator</code> for the input's type.
- * Then the method <code>locate</code> is used to extract the subsection.
+ * Subsections of an input element are determined by first finding an <code>IStructureCreator</code>
+ * for the input's type. Then the method <code>locate</code> is used to extract the subsection.
  * <p>
- * Each edition (variant in the list of variants) must implement the <code>IModificationDate</code> interface
- * so that the dialog can sort the editions and present them in a tree structure where every
- * node corresponds one day.
+ * Each edition (variant in the list of variants) must implement the <code>IModificationDate</code>
+ * interface so that the dialog can sort the editions and present them in a tree structure where
+ * every node corresponds one day.
  * <p>
  * The functionality is surfaced in a single function <code>selectEdition</code>.
  * <p>
@@ -96,35 +89,36 @@ import org.eclipse.compare.structuremergeviewer.IStructureCreator;
  *
  * @see IModificationDate
  * @see ITypedElement
- * 
- * @deprecated Use an <code>org.eclipse.team.ui.history.IHistoryPageSource</code> in conjunction with
- * the <code>org.eclipse.team.ui.history.IHistoryView</code> or a <code>HistoryPageCompareEditorInput</code>.
- * For sub-file elements, a <code>org.eclipse.team.ui.history.ElementLocalHistoryPageSource</code> can be used.
+ *
+ * @deprecated Use an <code>org.eclipse.team.ui.history.IHistoryPageSource</code> in conjunction
+ *             with the <code>org.eclipse.team.ui.history.IHistoryView</code> or a
+ *             <code>HistoryPageCompareEditorInput</code>. For sub-file elements, a
+ *             <code>org.eclipse.team.ui.history.ElementLocalHistoryPageSource</code> can be used.
  * @noextend This class is not intended to be subclassed by clients.
  */
 public class EditionSelectionDialog extends ResizableDialog {
-		
+
 	/**
 	 * An item in an underlying edition.
 	 */
 	private static class Pair {
-		
+
 		private ITypedElement fEdition;
 		private ITypedElement fItem;
 		private String fContent;
 		private IStructureCreator fStructureCreator;
 		private boolean fHasError= false;
-				
+
 		Pair(IStructureCreator structureCreator, ITypedElement edition, ITypedElement item) {
 			fStructureCreator= structureCreator;
 			fEdition= edition;
 			fItem= item;
 		}
-		
+
 		Pair(IStructureCreator structureCreator, ITypedElement edition) {
 			this(structureCreator, edition, edition);
 		}
-		
+
 		ITypedElement getEdition() {
 			return fEdition;
 		}
@@ -132,7 +126,7 @@ public class EditionSelectionDialog extends ResizableDialog {
 		ITypedElement getItem() {
 			return fItem;
 		}
-		
+
 		/*
 		 * The content is lazily loaded
 		 */
@@ -156,7 +150,7 @@ public class EditionSelectionDialog extends ResizableDialog {
 			}
 			return fContent;
 		}
-		
+
 		public boolean equals(Object other) {
 			if (other != null && other.getClass() == getClass()) {
 				if (getContent().equals(((Pair)other).getContent()))
@@ -169,7 +163,7 @@ public class EditionSelectionDialog extends ResizableDialog {
 			return getContent().hashCode();
 		}
 	}
-	
+
 	// Configuration options
 	private CompareConfiguration fCompareConfiguration;
 	private ArrayList fArrayList= new ArrayList();
@@ -187,7 +181,7 @@ public class EditionSelectionDialog extends ResizableDialog {
 	private boolean fStructureCompare= false;
 	/** allow for multiple selection */
 	private boolean fMultiSelect= false;
-	
+
 	/**
 	 * Maps from members to their corresponding editions.
 	 * Has only a single entry if dialog is used in "Replace" (and not "Add") mode.
@@ -205,7 +199,7 @@ public class EditionSelectionDialog extends ResizableDialog {
 	private ITypedElement fSelectedItem;
 	private String fTitleArg;
 	private Image fTitleImage;
-	
+
 	// SWT controls
 	private CompareViewerSwitchingPane fContentPane;
 	private Button fCommitButton;
@@ -217,34 +211,34 @@ public class EditionSelectionDialog extends ResizableDialog {
 	private Image fTimeImage;
 	private CompareViewerSwitchingPane fStructuredComparePane;
 	private Label statusLabel;
-	
+
 	/**
-	 * Creates a new modal, resizable dialog.
-	 * Various titles, icons, and labels are configured from the given resource bundle.
-	 * The following resource keys are used:
-	 * <pre>
-	 *	key         type          description
-	 *	title       String        dialog title
-	 *	width       Integer       initial width of dialog
-	 *	height      Integer       initial height of dialog
-	 *	treeTitleFormat   MessageFormat pane title for edition tree; arg 0 is the target
-	 *	dateIcon    String        icon for node in edition tree; path relative to plug-in
-	 *	timeIcon    String        icon for leaf in edition tree; path relative to plug-in
-	 *	todayFormat MessageFormat format string if date is todays date; arg 0 is date
-	 *	yesterdayFormat MessageFormat format string if date is yesterdays date; arg 0 is date
-	 *	dayFormat   MessageFormat format string if date is any other date; arg 0 is date
-	 *	editionLabel String       label for editions side of compare viewer; arg 0 is the date
-	 *	targetLabel  String       label for target side of compare viewer 
-	 *  buttonLabel  String       label for OK button; default is IDialogConstants.OK_LABEL
-	 * </pre>
-	 *
-	 * @param parent if not <code>null</code> the new dialog stays on top of this parent shell
-	 * @param bundle <code>ResourceBundle</code> to configure the dialog
-	 */
+     * Creates a new modal, resizable dialog. Various titles, icons, and labels are configured from
+     * the given resource bundle. The following resource keys are used:
+     * 
+     * <pre>
+     *	key         type          description
+     *	title       String        dialog title
+     *	width       Integer       initial width of dialog
+     *	height      Integer       initial height of dialog
+     *	treeTitleFormat   MessageFormat pane title for edition tree; arg 0 is the target
+     *	dateIcon    String        icon for node in edition tree; path relative to plug-in
+     *	timeIcon    String        icon for leaf in edition tree; path relative to plug-in
+     *	todayFormat MessageFormat format string if date is todays date; arg 0 is date
+     *	yesterdayFormat MessageFormat format string if date is yesterdays date; arg 0 is date
+     *	dayFormat   MessageFormat format string if date is any other date; arg 0 is date
+     *	editionLabel String       label for editions side of compare viewer; arg 0 is the date
+     *	targetLabel  String       label for target side of compare viewer
+     *  buttonLabel  String       label for OK button; default is IDialogConstants.OK_LABEL
+     * </pre>
+     *
+     * @param parent if not <code>null</code> the new dialog stays on top of this parent shell
+     * @param bundle <code>ResourceBundle</code> to configure the dialog
+     */
 	public EditionSelectionDialog(Shell parent, ResourceBundle bundle) {
 		super(parent, bundle);
 	}
-	
+
 	private CompareConfiguration getCompareConfiguration() {
 		if (fCompareConfiguration == null) {
 			fCompareConfiguration= new CompareConfiguration();
@@ -264,37 +258,37 @@ public class EditionSelectionDialog extends ResizableDialog {
 		}
 		return fCompareConfiguration;
 	}
-	
+
 	/**
-	 * Sets the help context for this dialog.
-	 * 
-	 * @param contextId the help context id.
-	 * @since 3.2
-	 */
+     * Sets the help context for this dialog.
+     *
+     * @param contextId the help context id.
+     * @since 3.2
+     */
 	public void setHelpContextId(String contextId) {
 		super.setHelpContextId(contextId);
 	}
-	
+
 	/**
-	 * Sets an additional and optional argument for the edition pane's title.
-	 *  
-	 * @param titleArgument an optional argument for the edition pane's title
-	 * @since 2.0
-	 */
+     * Sets an additional and optional argument for the edition pane's title.
+     *
+     * @param titleArgument an optional argument for the edition pane's title
+     * @since 2.0
+     */
 	public void setEditionTitleArgument(String titleArgument) {
 		fTitleArg= titleArgument;
 	}
-	
+
 	/**
-	 * Sets an optional image for the edition pane's title.
-	 *  
-	 * @param titleImage an optional image for the edition pane's title
-	 * @since 2.0
-	 */
+     * Sets an optional image for the edition pane's title.
+     *
+     * @param titleImage an optional image for the edition pane's title
+     * @since 2.0
+     */
 	public void setEditionTitleImage(Image titleImage) {
 		fTitleImage= titleImage;
 	}
-	
+
 	/**
 	 * Select the previous edition (presenting a UI).
 	 *
@@ -310,7 +304,7 @@ public class EditionSelectionDialog extends ResizableDialog {
 	public ITypedElement selectPreviousEdition(final ITypedElement target, ITypedElement[] inputEditions, Object ppath) {
 		Assert.isNotNull(target);
 		fTargetPair= new Pair(null, target);
-		
+
 		// sort input editions
 		final int count= inputEditions.length;
 		final IModificationDate[] editions= new IModificationDate[count];
@@ -318,7 +312,7 @@ public class EditionSelectionDialog extends ResizableDialog {
 			editions[i]= (IModificationDate) inputEditions[i];
 		if (count > 1)
 			internalSort(editions);
-			
+
 		// find StructureCreator if ppath is not null
 		IStructureCreator structureCreator= null;
 		if (ppath != null) {
@@ -332,7 +326,7 @@ public class EditionSelectionDialog extends ResizableDialog {
 			// does not work in add mode
 			return null;
 		}
-			
+
 		if (structureCreator != null) {
 			Pair pair= createPair(structureCreator, ppath, target);
 			if (pair != null)
@@ -340,32 +334,32 @@ public class EditionSelectionDialog extends ResizableDialog {
 			else
 				ppath= null;	// couldn't extract item because of error
 		}
-					
+
 		// from front (newest) to back (oldest)
 		for (int i= 0; i < count; i++) {
-				
+
 			ITypedElement edition= (ITypedElement) editions[i];
 			Pair pair= null;
-			
+
 			if (structureCreator != null && ppath != null) {
 				// extract sub element from edition
 				pair= createPair(structureCreator, ppath, edition);
 			} else {
 				pair= new Pair(null, edition);
 			}
-			
+
 			if (pair != null && pair.fHasError)
 				return null;
-				
+
 			if (pair != null && !fTargetPair.equals(pair)) {
 				return pair.fItem;
 			}
 		}
-		
+
 		// nothing found
 		return null;
 	}
-	
+
 	/**
 	 * Presents this modal dialog with the functionality described in the class comment above.
 	 *
@@ -378,10 +372,10 @@ public class EditionSelectionDialog extends ResizableDialog {
 	 * it is an <code>ITypedElement</code> returned from <code>IStructureCreator.locate(path, item)</code>
 	 */
 	public ITypedElement selectEdition(final ITypedElement target, ITypedElement[] inputEditions, Object ppath) {
-		
+
 		Assert.isNotNull(target);
 		fTargetPair= new Pair(null, target);
-		
+
 		// sort input editions
 		final int count= inputEditions.length;
 		final IModificationDate[] editions= new IModificationDate[count];
@@ -389,7 +383,7 @@ public class EditionSelectionDialog extends ResizableDialog {
 			editions[i]= (IModificationDate) inputEditions[i];
 		if (count > 1)
 			internalSort(editions);
-			
+
 		// find StructureCreator if ppath is not null
 		IStructureCreator structureCreator= null;
 		if (ppath != null) {
@@ -401,7 +395,7 @@ public class EditionSelectionDialog extends ResizableDialog {
 
 		if (!fAddMode) {
 			// replace mode
-			
+
 			if (structureCreator != null) {
 				Pair pair= createPair(structureCreator, ppath, target);
 				if (pair != null)
@@ -409,31 +403,31 @@ public class EditionSelectionDialog extends ResizableDialog {
 				else
 					ppath= null;	// couldn't extract item because of error
 			}
-			
+
 			// set the left and right labels for the compare viewer
 			String targetLabel= getTargetLabel(target, fTargetPair.getItem());
 			if (fTargetIsRight)
 				getCompareConfiguration().setRightLabel(targetLabel);
 			else
 				getCompareConfiguration().setLeftLabel(targetLabel);
-			
+
 			if (structureCreator != null && ppath != null) {	// extract sub element
-				
+
 				final IStructureCreator sc= structureCreator;
 				final Object path= ppath;
-				
+
 				// construct the comparer thread
 				// and perform the background extract
 				fThread= new Thread() {
 					public void run() {
-																				
+
 						// from front (newest) to back (oldest)
 						for (int i= 0; i < count; i++) {
-								
+
 							if (fEditionTree == null || fEditionTree.isDisposed())
 								break;
 							ITypedElement edition= (ITypedElement) editions[i];
-							
+
 							// extract sub element from edition
 							Pair pair= createPair(sc, path, edition);
 							if (pair != null)
@@ -445,20 +439,20 @@ public class EditionSelectionDialog extends ResizableDialog {
 			} else {
 				// create tree widget
 				create();
-				
+
 				// from front (newest) to back (oldest)
 				for (int i= 0; i < count; i++)
 					addMemberEdition(new Pair(null, (ITypedElement) editions[i]));
 			}
-			
+
 		} else {
 			// add mode
 			final Object container= ppath;
 			Assert.isNotNull(container);
-								
+
 			if (structureCreator == null)
 				return null;	// error
-		
+
 			// extract all elements of container
 			final HashSet current= new HashSet();
 			IStructureComparator sco= structureCreator.locate(container, target);
@@ -468,21 +462,21 @@ public class EditionSelectionDialog extends ResizableDialog {
 					for (int i= 0; i < children.length; i++)
 						current.add(children[i]);
 			}
-			
+
 			final IStructureCreator sc= structureCreator;
-			
+
 			// construct the comparer thread
 			// and perform the background extract
 			fThread= new Thread() {
 				public void run() {
-					
+
 					// from front (newest) to back (oldest)
 					for (int i= 0; i < count; i++) {
-							
+
 						if (fEditionTree == null || fEditionTree.isDisposed())
 							break;
 						ITypedElement edition= (ITypedElement) editions[i];
-						
+
 						IStructureComparator sco2= sc.locate(container, edition);
 						if (sco2 != null) {
 							Object[] children= sco2.getChildren();
@@ -499,14 +493,14 @@ public class EditionSelectionDialog extends ResizableDialog {
 				}
 			};
 		}
-		
+
 		open();
-		
+
 		if (getReturnCode() == OK)
 			return fSelectedItem;
 		return null;
 	}
-	
+
 	private Pair createPair(IStructureCreator sc, Object path, ITypedElement input) {
 		IStructureComparator scmp= sc.locate(path, input);
 		if (scmp == null && sc.getStructure(input) == null) {	// parse error
@@ -539,7 +533,7 @@ public class EditionSelectionDialog extends ResizableDialog {
 	public void setTargetIsRight(boolean isRight) {
 		fTargetIsRight= isRight;
 	}
-		
+
 	/**
 	 * Controls whether the <code>EditionSelectionDialog</code> is in 'add' mode
 	 * or 'replace' mode (the default).
@@ -551,19 +545,19 @@ public class EditionSelectionDialog extends ResizableDialog {
 		fAddMode= addMode;
 		fMultiSelect= addMode;
 	}
-	
+
 	/**
-	 * Controls whether the <code>EditionSelectionDialog</code> is in 'compare' mode
-	 * or 'add/replace' (the default) mode. 
-	 *
-	 * @param compareMode if true dialog is in 'add' mode.
-	 * @since 2.0
-	 */
+     * Controls whether the <code>EditionSelectionDialog</code> is in 'compare' mode or
+     * 'add/replace' (the default) mode.
+     *
+     * @param compareMode if true dialog is in 'add' mode.
+     * @since 2.0
+     */
 	public void setCompareMode(boolean compareMode) {
 		fCompareMode= compareMode;
 		fStructureCompare= fCompareMode && !fAddMode;
 	}
-	
+
 	/**
 	 * Returns the input target that has been specified with the most recent call
 	 * to <code>selectEdition</code>. If a not <code>null</code> path was specified this method
@@ -578,20 +572,20 @@ public class EditionSelectionDialog extends ResizableDialog {
 	public ITypedElement getTarget() {
 		return fTargetPair.getItem();
 	}
- 	
+
 	/**
-	 * Returns the editions that have been selected with the most
-	 * recent call to <code>selectEdition</code>.
-	 * 
-	 * @return the selected editions as an array.
-	 * @since 2.1
-	 */
+     * Returns the editions that have been selected with the most recent call to
+     * <code>selectEdition</code>.
+     *
+     * @return the selected editions as an array.
+     * @since 2.1
+     */
 	public ITypedElement[] getSelection() {
 		ArrayList result= new ArrayList();
 		if (fMemberSelection != null) {
 			Iterator iter= fArrayList.iterator();
 			while (iter.hasNext()) {
-				Object edition= iter.next();		
+                Object edition = iter.next();
 				Object item= fMemberSelection.get(edition);
 				if (item != null)
 					result.add(item);
@@ -600,21 +594,22 @@ public class EditionSelectionDialog extends ResizableDialog {
 			result.add(fSelectedItem);
 		return (ITypedElement[]) result.toArray(new ITypedElement[result.size()]);
 	}
-		
- 	/**
- 	 * Returns a label for identifying the target side of a compare viewer.
- 	 * This implementation extracts the value for the key "targetLabel" from the resource bundle
- 	 * and passes it as the format argument to <code>MessageFormat.format</code>.
- 	 * The single format argument for <code>MessageFormat.format</code> ("{0}" in the format string)
- 	 * is the name of the given input element.
-	 * <p>
-	 * Subclasses may override to create their own label.
-	 * </p>
- 	 *
- 	 * @param target the target element for which a label must be returned
- 	 * @param item if a path has been specified in <code>selectEdition</code> a sub element of the given target; otherwise the same as target
- 	 * @return a label the target side of a compare viewer
-  	 */
+
+    /**
+     * Returns a label for identifying the target side of a compare viewer. This implementation
+     * extracts the value for the key "targetLabel" from the resource bundle and passes it as the
+     * format argument to <code>MessageFormat.format</code>. The single format argument for
+     * <code>MessageFormat.format</code> ("{0}" in the format string) is the name of the given input
+     * element.
+     * <p>
+     * Subclasses may override to create their own label.
+     * </p>
+     *
+     * @param target the target element for which a label must be returned
+     * @param item if a path has been specified in <code>selectEdition</code> a sub element of the
+     *        given target; otherwise the same as target
+     * @return a label the target side of a compare viewer
+     */
 	protected String getTargetLabel(ITypedElement target, ITypedElement item) {
 		String format= null;
 		if (target instanceof ResourceNode)
@@ -623,7 +618,7 @@ public class EditionSelectionDialog extends ResizableDialog {
 			format= Utilities.getString(fBundle, "targetLabel"); //$NON-NLS-1$
 		if (format == null)
 			format= "x{0}"; //$NON-NLS-1$
-		
+
 		return formatString(format, target.getName());
 	}
 
@@ -633,8 +628,8 @@ public class EditionSelectionDialog extends ResizableDialog {
 			return MessageFormat.format(string, variable);
 		return string;
 	}
-	
- 	private boolean hasDoubleQuotes(String string) {
+
+    private boolean hasDoubleQuotes(String string) {
 		return string.indexOf("''") != -1; //$NON-NLS-1$
 	}
 
@@ -643,19 +638,20 @@ public class EditionSelectionDialog extends ResizableDialog {
 	}
 
 	/**
- 	 * Returns a label for identifying the edition side of a compare viewer.
- 	 * This implementation extracts the value for the key "editionLabel" from the resource bundle
- 	 * and passes it as the format argument to <code>MessageFormat.format</code>.
- 	 * The single format argument for <code>MessageFormat.format</code> ("{0}" in the format string)
- 	 * is the formatted modification date of the given input element.
- 	 * <p>
-	 * Subclasses may override to create their own label.
-	 * </p>
-	 *
-	 * @param selectedEdition the selected edition for which a label must be returned
- 	 * @param item if a path has been specified in <code>selectEdition</code> a sub element of the given selectedEdition; otherwise the same as selectedEdition
- 	 * @return a label for the edition side of a compare viewer
-  	 */
+     * Returns a label for identifying the edition side of a compare viewer. This implementation
+     * extracts the value for the key "editionLabel" from the resource bundle and passes it as the
+     * format argument to <code>MessageFormat.format</code>. The single format argument for
+     * <code>MessageFormat.format</code> ("{0}" in the format string) is the formatted modification
+     * date of the given input element.
+     * <p>
+     * Subclasses may override to create their own label.
+     * </p>
+     *
+     * @param selectedEdition the selected edition for which a label must be returned
+     * @param item if a path has been specified in <code>selectEdition</code> a sub element of the
+     *        given selectedEdition; otherwise the same as selectedEdition
+     * @return a label for the edition side of a compare viewer
+     */
 	protected String getEditionLabel(ITypedElement selectedEdition, ITypedElement item) {
 		String format= null;
 		if (selectedEdition instanceof ResourceNode)
@@ -666,34 +662,34 @@ public class EditionSelectionDialog extends ResizableDialog {
 			format= Utilities.getString(fBundle, "editionLabel");	//$NON-NLS-1$
 		if (format == null)
 			format= "x{0}";	//$NON-NLS-1$
-		
+
 
 		String date= "";	//$NON-NLS-1$
 		if (selectedEdition instanceof IModificationDate) {
 			long modDate= ((IModificationDate)selectedEdition).getModificationDate();
 			date= DateFormat.getDateTimeInstance().format(new Date(modDate));
 		}
-		
+
 		return formatString(format, date);
 	}
-	
- 	/**
- 	 * Returns a label for identifying a node in the edition tree viewer.
- 	 * This implementation extracts the value for the key "workspaceTreeFormat" or
- 	 * "treeFormat" (in that order) from the resource bundle
- 	 * and passes it as the format argument to <code>MessageFormat.format</code>.
- 	 * The single format argument for <code>MessageFormat.format</code> ("{0}" in the format string)
- 	 * is the formatted modification date of the given input element.
- 	 * <p>
-	 * Subclasses may override to create their own label.
-	 * </p>
-	 *
-	 * @param edition the edition for which a label must be returned
- 	 * @param item if a path has been specified in <code>edition</code> a sub element of the given edition; otherwise the same as edition
- 	 * @param date this date will be returned as part of the formatted string
- 	 * @return a label of a node in the edition tree viewer
-	 * @since 2.0
-	 */
+
+    /**
+     * Returns a label for identifying a node in the edition tree viewer. This implementation
+     * extracts the value for the key "workspaceTreeFormat" or "treeFormat" (in that order) from the
+     * resource bundle and passes it as the format argument to <code>MessageFormat.format</code>.
+     * The single format argument for <code>MessageFormat.format</code> ("{0}" in the format string)
+     * is the formatted modification date of the given input element.
+     * <p>
+     * Subclasses may override to create their own label.
+     * </p>
+     *
+     * @param edition the edition for which a label must be returned
+     * @param item if a path has been specified in <code>edition</code> a sub element of the given
+     *        edition; otherwise the same as edition
+     * @param date this date will be returned as part of the formatted string
+     * @return a label of a node in the edition tree viewer
+     * @since 2.0
+     */
 	protected String getShortEditionLabel(ITypedElement edition, ITypedElement item, Date date) {
 		String format= null;
 		if (edition instanceof ResourceNode)
@@ -706,22 +702,23 @@ public class EditionSelectionDialog extends ResizableDialog {
 		String ds= DateFormat.getTimeInstance().format(date);
 		return formatString(format, ds);
 	}
-	
- 	/**
- 	 * Returns an image for identifying the edition side of a compare viewer.
- 	 * This implementation extracts the value for the key "editionLabel" from the resource bundle
- 	 * and passes it as the format argument to <code>MessageFormat.format</code>.
- 	 * The single format argument for <code>MessageFormat.format</code> ("{0}" in the format string)
- 	 * is the formatted modification date of the given input element.
- 	 * <p>
-	 * Subclasses may override to create their own label.
-	 * </p>
-	 *
-	 * @param selectedEdition the selected edition for which a label must be returned
- 	 * @param item if a path has been specified in <code>selectEdition</code> a sub element of the given selectedEdition; otherwise the same as selectedEdition
- 	 * @return a label the edition side of a compare viewer
-  	 * @since 2.0
- 	 */
+
+    /**
+     * Returns an image for identifying the edition side of a compare viewer. This implementation
+     * extracts the value for the key "editionLabel" from the resource bundle and passes it as the
+     * format argument to <code>MessageFormat.format</code>. The single format argument for
+     * <code>MessageFormat.format</code> ("{0}" in the format string) is the formatted modification
+     * date of the given input element.
+     * <p>
+     * Subclasses may override to create their own label.
+     * </p>
+     *
+     * @param selectedEdition the selected edition for which a label must be returned
+     * @param item if a path has been specified in <code>selectEdition</code> a sub element of the
+     *        given selectedEdition; otherwise the same as selectedEdition
+     * @return a label the edition side of a compare viewer
+     * @since 2.0
+     */
 	protected Image getEditionImage(ITypedElement selectedEdition, ITypedElement item) {
 		if (selectedEdition instanceof ResourceNode)
 			return selectedEdition.getImage();
@@ -736,16 +733,16 @@ public class EditionSelectionDialog extends ResizableDialog {
 		}
 		return null;
 	}
-	
- 	/* (non Javadoc)
- 	 * Creates SWT control tree.
- 	 */
+
+    /*
+     * (non Javadoc) Creates SWT control tree.
+     */
 	protected synchronized Control createDialogArea(Composite parent2) {
-		
+
 		Composite parent= (Composite) super.createDialogArea(parent2);
 
 		getShell().setText(Utilities.getString(fBundle, "title")); //$NON-NLS-1$
-		
+
 		Splitter vsplitter= new Splitter(parent,  SWT.VERTICAL);
 		vsplitter.setLayoutData(new GridData(GridData.HORIZONTAL_ALIGN_FILL | GridData.GRAB_HORIZONTAL
 					| GridData.VERTICAL_ALIGN_FILL | GridData.GRAB_VERTICAL));
@@ -762,20 +759,20 @@ public class EditionSelectionDialog extends ResizableDialog {
 						fDateImage= null;
 					}
 					if (fTimeImage != null) {
-						fTimeImage.dispose();						
+                                    fTimeImage.dispose();
 						fTimeImage= null;
 					}
 				}
 			}
 		);
-		
+
 		if (fAddMode) {
 			// we need two panes: the left for the elements, the right one for the editions
 			Splitter hsplitter= new Splitter(vsplitter,  SWT.HORIZONTAL);
-			
+
 			fMemberPane= new CompareViewerPane(hsplitter, SWT.BORDER | SWT.FLAT);
 			fMemberPane.setText(Utilities.getString(fBundle, "memberPaneTitle")); //$NON-NLS-1$
-			
+
 			int flags= SWT.H_SCROLL | SWT.V_SCROLL;
 			if (fMultiSelect)
 				flags|= SWT.CHECK;
@@ -791,10 +788,10 @@ public class EditionSelectionDialog extends ResizableDialog {
 									fArrayList.add(data);
 								else
 									fArrayList.remove(data);
-									
+
 								if (fCommitButton != null)
 									fCommitButton.setEnabled(fArrayList.size() > 0);
-									
+
 								fMemberTable.setSelection(new TableItem[] { ti });
 							}
 						}
@@ -804,13 +801,13 @@ public class EditionSelectionDialog extends ResizableDialog {
 			);
 			fMemberPane.setContent(fMemberTable);
 			fMemberTable.setFocus();
-						
+
 			fEditionPane= new CompareViewerPane(hsplitter, SWT.BORDER | SWT.FLAT);
 		} else {
 			if (fStructureCompare) {
 				// we need two panes: the left for the elements, the right one for the structured diff
 				Splitter hsplitter= new Splitter(vsplitter,  SWT.HORIZONTAL);
-				
+
 				fEditionPane= new CompareViewerPane(hsplitter, SWT.BORDER | SWT.FLAT);
 				fStructuredComparePane= new CompareViewerSwitchingPane(hsplitter, SWT.BORDER | SWT.FLAT, true) {
 					protected Viewer getViewer(Viewer oldViewer, Object input) {
@@ -838,7 +835,7 @@ public class EditionSelectionDialog extends ResizableDialog {
 			if (fTitleImage != null)
 				fEditionPane.setImage(fTitleImage);
 		}
-		
+
 		fEditionTree= new Tree(fEditionPane, SWT.H_SCROLL | SWT.V_SCROLL);
 		fEditionTree.addSelectionListener(
 			new SelectionAdapter() {
@@ -850,33 +847,33 @@ public class EditionSelectionDialog extends ResizableDialog {
 				}
 			}
 		);
-		fEditionPane.setContent(fEditionTree);		
-		
+        fEditionPane.setContent(fEditionTree);
+
 		// now start the thread (and forget about it)
 		if (fThread != null) {
 			fThread.start();
 			fThread= null;
 		}
-		
+
 		fContentPane= new CompareViewerSwitchingPane(vsplitter, SWT.BORDER | SWT.FLAT) {
 			protected Viewer getViewer(Viewer oldViewer, Object input) {
-				return CompareUI.findContentViewer(oldViewer, input, this, getCompareConfiguration());	
+                return CompareUI.findContentViewer(oldViewer, input, this, getCompareConfiguration());
 			}
 		};
 		vsplitter.setWeights(new int[] { 30, 70 });
-		
+
 		statusLabel = new Label(parent, SWT.NONE);
 		statusLabel.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
 
-		applyDialogFont(parent);				
+        applyDialogFont(parent);
 		return parent;
-	}	
-	
+    }
+
 	/* (non-Javadoc)
 	 * Method declared on Dialog.
 	 */
 	protected void createButtonsForButtonBar(Composite parent) {
-		String buttonLabel= Utilities.getString(fBundle, "buttonLabel", IDialogConstants.OK_LABEL); //$NON-NLS-1$
+        String buttonLabel = Utilities.getString(fBundle, "buttonLabel", IDialogConstants.get().OK_LABEL); //$NON-NLS-1$
 		if (fCompareMode) {
 			// only a 'Done' button
 			createButton(parent, IDialogConstants.CANCEL_ID, buttonLabel, false);
@@ -884,7 +881,7 @@ public class EditionSelectionDialog extends ResizableDialog {
 			// a 'Cancel' and a 'Add/Replace' button
 			fCommitButton= createButton(parent, IDialogConstants.OK_ID, buttonLabel, true);
 			fCommitButton.setEnabled(false);
-			createButton(parent, IDialogConstants.CANCEL_ID, IDialogConstants.CANCEL_LABEL, false);
+            createButton(parent, IDialogConstants.CANCEL_ID, IDialogConstants.get().CANCEL_LABEL, false);
 		}
 	}
 
@@ -900,11 +897,11 @@ public class EditionSelectionDialog extends ResizableDialog {
 	}
 
 	//---- private stuff ----------------------------------------------------------------------------------------
-				
+
 	/*
 	 * Asynchroneously sends a Pair (or null) to the UI thread.
 	 */
-	private void sendPair(final Pair pair) {		
+    private void sendPair(final Pair pair) {
 		if (fEditionTree != null && !fEditionTree.isDisposed()) {
 			Display display= fEditionTree.getDisplay();
 			display.asyncExec(
@@ -916,8 +913,8 @@ public class EditionSelectionDialog extends ResizableDialog {
 			);
 		}
 	}
-	
-	private static void internalSort(IModificationDate[] keys) { 
+
+    private static void internalSort(IModificationDate[] keys) {
 		Arrays.sort(keys, new Comparator() {
 			public int compare(Object o1, Object o2) {
 				IModificationDate d1= (IModificationDate) o1;
@@ -931,7 +928,7 @@ public class EditionSelectionDialog extends ResizableDialog {
 			}
 		});
 	}
-	
+
 	/*
 	 * Adds the given Pair to the member editions.
 	 * If HIDE_IDENTICAL is true the new Pair is only added if its contents
@@ -940,9 +937,9 @@ public class EditionSelectionDialog extends ResizableDialog {
 	 * in the member or edition viewer.
 	 */
 	private void addMemberEdition(Pair pair) {
-		
+
 		if (pair == null) {	// end of list of pairs
-			if (fMemberTable != null) {	
+            if (fMemberTable != null) {
 				if (!fMemberTable.isDisposed() && fMemberTable.getItemCount() == 0) {
 					if (fMultiSelect) {
 						fMemberTable.dispose();
@@ -960,12 +957,12 @@ public class EditionSelectionDialog extends ResizableDialog {
 			}
 			return;
 		}
-		
+
 		if (fMemberEditions == null)
 			fMemberEditions= new HashMap();
 		if (fMultiSelect && fMemberSelection == null)
 			fMemberSelection= new HashMap();
-		
+
 		ITypedElement item= pair.getItem();
 		List editions= (List) fMemberEditions.get(item);
 		if (editions == null) {
@@ -974,7 +971,7 @@ public class EditionSelectionDialog extends ResizableDialog {
 			if (fMemberTable != null && !fMemberTable.isDisposed()) {
 				ITypedElement te= item;
 				String name= te.getName();
-				
+
 				// find position
 				TableItem[] items= fMemberTable.getItems();
 				int where= items.length;
@@ -985,7 +982,7 @@ public class EditionSelectionDialog extends ResizableDialog {
 						break;
 					}
 				}
-				
+
 				TableItem ti= new TableItem(fMemberTable, where, SWT.NULL);
 				ti.setImage(te.getImage());
 				ti.setText(name);
@@ -1001,24 +998,24 @@ public class EditionSelectionDialog extends ResizableDialog {
 				return;	// don't add since the new one is equal to old
 		}
 		editions.add(pair);
-		
+
 		if (!fAddMode || editions == fCurrentEditions)
 			addEdition(pair);
 	}
-		
+
 	/*
 	 * Returns the number of s since Jan 1st, 1970.
 	 * The given date is converted to GMT and daylight saving is taken into account too.
 	 */
 	private long dayNumber(long date) {
 		int ONE_DAY_MS= 24*60*60 * 1000; // one day in milli seconds
-		
+
 		Calendar calendar= Calendar.getInstance();
 		long localTimeOffset= calendar.get(Calendar.ZONE_OFFSET) + calendar.get(Calendar.DST_OFFSET);
-		
+
 		return (date + localTimeOffset) / ONE_DAY_MS;
 	}
-	
+
 	/*
 	 * Adds the given Pair to the edition tree.
 	 * It takes care of creating tree nodes for different dates.
@@ -1026,19 +1023,19 @@ public class EditionSelectionDialog extends ResizableDialog {
 	private void addEdition(Pair pair) {
 		if (fEditionTree == null || fEditionTree.isDisposed())
 			return;
-		
+
 		// find last day
 		TreeItem[] days= fEditionTree.getItems();
 		TreeItem lastDay= null;
 		if (days.length > 0)
 			lastDay= days[days.length-1];
-		
+
 		boolean first= lastDay == null;
-		
+
 		ITypedElement edition= pair.getEdition();
 		ITypedElement item= pair.getItem();
-		
-		long ldate= ((IModificationDate)edition).getModificationDate();		
+
+        long ldate = ((IModificationDate) edition).getModificationDate();
 		long day= dayNumber(ldate);
 		Date date= new Date(ldate);
 		if (lastDay == null || day != dayNumber(((Date)lastDay.getData()).getTime())) {
@@ -1052,7 +1049,7 @@ public class EditionSelectionDialog extends ResizableDialog {
 			lastDay.setImage(fDateImage);
 			String df= DateFormat.getDateInstance().format(date);
 			long today= dayNumber(System.currentTimeMillis());
-			
+
 			String formatKey;
 			if (day == today)
 				formatKey= "todayFormat"; //$NON-NLS-1$
@@ -1068,16 +1065,16 @@ public class EditionSelectionDialog extends ResizableDialog {
 		}
 		TreeItem ti= new TreeItem(lastDay, SWT.NONE);
 		ti.setImage(getEditionImage(edition, item));
-		
+
 		String s= getShortEditionLabel(edition, item, date);
 		if (pair.fHasError) {
 			String pattern= Utilities.getString(fBundle, "parseErrorFormat"); //$NON-NLS-1$
 			s= MessageFormat.format(pattern, s);
 		}
 		ti.setText(s);
-		
+
 		ti.setData(pair);
-		
+
 		// determine selected TreeItem
 		TreeItem selection= first ? ti : null;
 		if (fMemberSelection != null) {
@@ -1095,11 +1092,11 @@ public class EditionSelectionDialog extends ResizableDialog {
 				fEditionTree.setFocus();
 			feedInput(selection);
 		}
-		
+
 		if (first) // expand first node
 			lastDay.setExpanded(true);
 	}
-						
+
 	/*
 	 * Feeds selection from member viewer to edition viewer.
 	 */
@@ -1110,11 +1107,11 @@ public class EditionSelectionDialog extends ResizableDialog {
 			if (editions != fCurrentEditions) {
 				fCurrentEditions= editions;
 				fEditionTree.removeAll();
-				
+
 				String pattern= Utilities.getString(fBundle, "treeTitleFormat"); //$NON-NLS-1$
 				String title= MessageFormat.format(pattern, new Object[] { ((Item)w).getText() });
 				fEditionPane.setText(title);
-								
+
 				Iterator iter= editions.iterator();
 				while (iter.hasNext()) {
 					Object item= iter.next();
@@ -1124,7 +1121,7 @@ public class EditionSelectionDialog extends ResizableDialog {
 			}
 		}
 	}
-	
+
 	private void setInput(Object input) {
 		if (!fCompare && input instanceof ICompareInput) {
 			ICompareInput ci= (ICompareInput) input;
@@ -1137,7 +1134,7 @@ public class EditionSelectionDialog extends ResizableDialog {
 		if (fStructuredComparePane != null)
 			fStructuredComparePane.setInput(input);
 	}
-	
+
 	/*
 	 * Feeds selection from edition viewer to content (and structure) viewer.
 	 */
@@ -1148,11 +1145,11 @@ public class EditionSelectionDialog extends ResizableDialog {
 			Pair pair= (Pair) input;
 			fSelectedItem= pair.getItem();
 			isOK= !pair.fHasError;
-			
+
 			ITypedElement edition= pair.getEdition();
 			String editionLabel= getEditionLabel(edition, fSelectedItem);
 			Image editionImage= getEditionImage(edition, fSelectedItem);
-					
+
 			if (fAddMode) {
 				if (fMemberSelection != null)
 					fMemberSelection.put(fCurrentEditions, fSelectedItem);
@@ -1182,7 +1179,7 @@ public class EditionSelectionDialog extends ResizableDialog {
 				fCommitButton.setEnabled(isOK && fSelectedItem != null && fTargetPair.getItem() != fSelectedItem);
 		}
 	}
-	
+
 	/*
 	 * Feeds selection from structure viewer to content viewer.
 	 */

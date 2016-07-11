@@ -10,37 +10,59 @@
  *******************************************************************************/
 package org.eclipse.compare.internal;
 
-import java.io.*;
-import com.ibm.icu.text.DateFormat;
-import com.ibm.icu.text.MessageFormat;
+import java.io.BufferedInputStream;
+import java.io.InputStream;
 import java.util.ArrayList;
-import com.ibm.icu.util.Calendar;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.ResourceBundle;
 
-import org.eclipse.swt.SWT;
-import org.eclipse.swt.events.*;
-import org.eclipse.swt.graphics.*;
-import org.eclipse.swt.layout.*;
-import org.eclipse.swt.widgets.*;
-
-import org.eclipse.jface.dialogs.*;
+import org.eclipse.compare.CompareConfiguration;
+import org.eclipse.compare.CompareUI;
+import org.eclipse.compare.CompareViewerPane;
+import org.eclipse.compare.CompareViewerSwitchingPane;
+import org.eclipse.compare.IEncodedStreamContentAccessor;
+import org.eclipse.compare.IModificationDate;
+import org.eclipse.compare.ITypedElement;
+import org.eclipse.compare.Splitter;
+import org.eclipse.core.resources.IContainer;
+import org.eclipse.core.resources.IFile;
+import org.eclipse.core.resources.IFileState;
+import org.eclipse.core.runtime.CoreException;
+import org.eclipse.core.runtime.NullProgressMonitor;
+import org.eclipse.jface.dialogs.IDialogConstants;
 import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.jface.viewers.Viewer;
+import org.eclipse.swt.SWT;
+import org.eclipse.swt.events.DisposeEvent;
+import org.eclipse.swt.events.DisposeListener;
+import org.eclipse.swt.events.SelectionAdapter;
+import org.eclipse.swt.events.SelectionEvent;
+import org.eclipse.swt.graphics.Image;
+import org.eclipse.swt.layout.GridData;
+import org.eclipse.swt.layout.GridLayout;
+import org.eclipse.swt.widgets.Button;
+import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.Control;
+import org.eclipse.swt.widgets.Label;
+import org.eclipse.swt.widgets.Shell;
+import org.eclipse.swt.widgets.Table;
+import org.eclipse.swt.widgets.TableItem;
+import org.eclipse.swt.widgets.Tree;
+import org.eclipse.swt.widgets.TreeItem;
+import org.eclipse.swt.widgets.Widget;
 
-import org.eclipse.core.resources.*;
-import org.eclipse.core.runtime.*;
-
-import org.eclipse.compare.*;
+import com.ibm.icu.text.DateFormat;
+import com.ibm.icu.text.MessageFormat;
+import com.ibm.icu.util.Calendar;
 
 
 public class AddFromHistoryDialog extends ResizableDialog {
-	
+
 	static class HistoryInput implements ITypedElement, IEncodedStreamContentAccessor, IModificationDate {
 		IFile fFile;
 		IFileState fFileState;
-		
+
 		HistoryInput(IFile file, IFileState fileState) {
 			fFile= file;
 			fFileState= fileState;
@@ -72,20 +94,20 @@ public class AddFromHistoryDialog extends ResizableDialog {
 			return fFileState.getModificationTime();
 		}
 	}
-	
+
 	static class FileHistory {
 		private IFile fFile;
 		private IFileState[] fStates;
 		private int fSelected;
-		
+
 		FileHistory(IFile file) {
 			fFile= file;
 		}
-		
+
 		IFile getFile() {
 			return fFile;
 		}
-		
+
 		IFileState[] getStates() {
 			if (fStates == null) {
 				try {
@@ -96,11 +118,11 @@ public class AddFromHistoryDialog extends ResizableDialog {
 			}
 			return fStates;
 		}
-		
+
 		IFileState getSelectedState() {
 			return getStates()[fSelected];
 		}
-		
+
 		void setSelected(IFileState state) {
 			for (int i= 0; i < fStates.length; i++) {
 				if (fStates[i] == state) {
@@ -109,11 +131,11 @@ public class AddFromHistoryDialog extends ResizableDialog {
 				}
 			}
 		}
-		
+
 		HistoryInput getHistoryInput() {
 			return new HistoryInput(fFile, getSelectedState());
 		}
-		
+
 		boolean isSelected(int index) {
 			return index == fSelected;
 		}
@@ -136,7 +158,7 @@ public class AddFromHistoryDialog extends ResizableDialog {
 
 	public AddFromHistoryDialog(Shell parent, ResourceBundle bundle) {
 		super(parent, bundle);
-					
+
 		String iconName= Utilities.getString(fBundle, "dateIcon", "obj16/day_obj.gif"); //$NON-NLS-2$ //$NON-NLS-1$
 		ImageDescriptor id= CompareUIPlugin.getImageDescriptor(iconName);
 		if (id != null)
@@ -146,16 +168,16 @@ public class AddFromHistoryDialog extends ResizableDialog {
 		if (id != null)
 			fTimeImage= id.createImage();
 	}
-	
+
 	public boolean select(IContainer root, IFile[] inputFiles) {
-		
+
 		create();	// create widgets
-		
+
 		String format= Utilities.getString(fBundle, "memberPaneTitle");	//$NON-NLS-1$
 		String title= MessageFormat.format(format, root.getName());
 		fMemberPane.setImage(CompareUI.getImage(root));
 		fMemberPane.setText(title);
-		
+
 		// sort input files
 		final int count= inputFiles.length;
 		final IFile[] files= new IFile[count];
@@ -163,20 +185,20 @@ public class AddFromHistoryDialog extends ResizableDialog {
 			files[i]= inputFiles[i];
 		if (count > 1)
 			internalSort(files, 0, count-1);
-			
-		
+
+
 		String prefix= root.getFullPath().toString();
-		
+
 		if (fMemberTable != null && !fMemberTable.isDisposed()) {
 			for (int i = 0; i < files.length; i++) {
 				IFile file = files[i];
 				String path = file.getFullPath().toString();
-				
+
 				// ignore a recently deleted file at the same path as the
 				// container
 				if (path.equals(prefix))
 					continue;
-				
+
 				if (path.startsWith(prefix))
 					path = path.substring(prefix.length() + 1);
 				TableItem ti = new TableItem(fMemberTable, SWT.NONE);
@@ -185,12 +207,12 @@ public class AddFromHistoryDialog extends ResizableDialog {
 				ti.setData(new FileHistory(file));
 			}
 		}
-		
+
 		open();
-		
+
 		return (getReturnCode() == OK) && (fArrayList.size() > 0);
 	}
-		
+
 	HistoryInput[] getSelected() {
 		HistoryInput[] selected= new HistoryInput[fArrayList.size()];
 		Iterator iter= fArrayList.iterator();
@@ -200,13 +222,13 @@ public class AddFromHistoryDialog extends ResizableDialog {
 		}
 		return selected;
 	}
-				
+
 	protected synchronized Control createDialogArea(Composite parent2) {
-		
+
 		Composite parent= (Composite) super.createDialogArea(parent2);
 
 		getShell().setText(Utilities.getString(fBundle, "title")); //$NON-NLS-1$
-		
+
 		org.eclipse.compare.Splitter vsplitter= new org.eclipse.compare.Splitter(parent,  SWT.VERTICAL);
 		vsplitter.setLayoutData(new GridData(GridData.HORIZONTAL_ALIGN_FILL | GridData.GRAB_HORIZONTAL
 					| GridData.VERTICAL_ALIGN_FILL | GridData.GRAB_VERTICAL));
@@ -221,10 +243,10 @@ public class AddFromHistoryDialog extends ResizableDialog {
 				}
 			}
 		);
-		
+
 		// we need two panes: the left for the elements, the right one for the editions
 		Splitter hsplitter= new Splitter(vsplitter,  SWT.HORIZONTAL);
-		
+
 		Composite c= new Composite(hsplitter, SWT.NONE);
 		GridLayout layout= new GridLayout();
 		layout.marginWidth= 0;
@@ -249,7 +271,7 @@ public class AddFromHistoryDialog extends ResizableDialog {
 								fArrayList.add(ti.getData());
 							else
 								fArrayList.remove(ti.getData());
-								
+
 							if (fCommitButton != null)
 								fCommitButton.setEnabled(fArrayList.size() > 0);
 						}
@@ -259,9 +281,9 @@ public class AddFromHistoryDialog extends ResizableDialog {
 				}
 			}
 		);
-				
+
 		fMemberPane.setContent(fMemberTable);
-		
+
 		c= new Composite(hsplitter, SWT.NONE);
 		layout= new GridLayout();
 		layout.marginWidth= 0;
@@ -274,7 +296,7 @@ public class AddFromHistoryDialog extends ResizableDialog {
 		fEditionPane= new CompareViewerPane(c, SWT.BORDER | SWT.FLAT);
 		gd= new GridData(GridData.FILL_HORIZONTAL | GridData.FILL_VERTICAL);
 		fEditionPane.setLayoutData(gd);
-		
+
 		fEditionTree= new Tree(fEditionPane, SWT.H_SCROLL | SWT.V_SCROLL);
 		fEditionTree.addSelectionListener(
 			new SelectionAdapter() {
@@ -283,19 +305,19 @@ public class AddFromHistoryDialog extends ResizableDialog {
 				}
 			}
 		);
-		fEditionPane.setContent(fEditionTree);		
-		
+        fEditionPane.setContent(fEditionTree);
+
 		applyDialogFont(parent); // to avoid applying font to compare viewer
 		fContentPane= new CompareViewerSwitchingPane(vsplitter, SWT.BORDER | SWT.FLAT) {
 			protected Viewer getViewer(Viewer oldViewer, Object input) {
-				return CompareUI.findContentViewer(oldViewer, input, this, fCompareConfiguration);	
+                return CompareUI.findContentViewer(oldViewer, input, this, fCompareConfiguration);
 			}
 		};
 		vsplitter.setWeights(new int[] { 30, 70 });
-		
+
 		return parent;
 	}
-	
+
 	/*
 	 * Feeds selection from member viewer to edition viewer.
 	 */
@@ -304,18 +326,18 @@ public class AddFromHistoryDialog extends ResizableDialog {
 		if (w != null)
 			data= w.getData();
 		if (data instanceof FileHistory) {
-			
+
 			FileHistory h= (FileHistory) data;
 			fCurrentFileHistory= h;
-			
+
 			IFile file= h.getFile();
 			IFileState[] states= h.getStates();
-			
+
 			fEditionPane.setImage(CompareUI.getImage(file));
 			String pattern= Utilities.getString(fBundle, "treeTitleFormat"); //$NON-NLS-1$
 			String title= MessageFormat.format(pattern, file.getName());
 			fEditionPane.setText(title);
-			
+
 			if (fEditionTree != null) {
 				fEditionTree.setRedraw(false);
 				fEditionTree.removeAll();
@@ -327,7 +349,7 @@ public class AddFromHistoryDialog extends ResizableDialog {
 		} else
 			fCurrentFileHistory= null;
 	}
-	
+
 	/*
 	 * Adds the given Pair to the edition tree.
 	 * It takes care of creating tree nodes for different dates.
@@ -335,16 +357,16 @@ public class AddFromHistoryDialog extends ResizableDialog {
 	private void addEdition(HistoryInput input, boolean isSelected) {
 		if (fEditionTree == null || fEditionTree.isDisposed())
 			return;
-		
+
 		IFileState state= input.fFileState;
-		
+
 		// find last day
 		TreeItem[] days= fEditionTree.getItems();
 		TreeItem lastDay= null;
 		if (days.length > 0)
 			lastDay= days[days.length-1];
-						
-		long ldate= state.getModificationTime();		
+
+        long ldate = state.getModificationTime();
 		long day= dayNumber(ldate);
 		Date date= new Date(ldate);
 		if (lastDay == null || day != dayNumber(((Date)lastDay.getData()).getTime())) {
@@ -352,7 +374,7 @@ public class AddFromHistoryDialog extends ResizableDialog {
 			lastDay.setImage(fDateImage);
 			String df= DateFormat.getDateInstance().format(date);
 			long today= dayNumber(System.currentTimeMillis());
-			
+
 			String formatKey;
 			if (day == today)
 				formatKey= "todayFormat"; //$NON-NLS-1$
@@ -377,20 +399,20 @@ public class AddFromHistoryDialog extends ResizableDialog {
 			feedContent(ti);
 		}
 	}
-						
+
 	/*
 	 * Returns the number of s since Jan 1st, 1970.
 	 * The given date is converted to GMT and daylight saving is taken into account too.
 	 */
 	private long dayNumber(long date) {
 		int ONE_DAY_MS= 24*60*60 * 1000; // one day in milli seconds
-		
+
 		Calendar calendar= Calendar.getInstance();
 		long localTimeOffset= calendar.get(Calendar.ZONE_OFFSET) + calendar.get(Calendar.DST_OFFSET);
-		
+
 		return (date + localTimeOffset) / ONE_DAY_MS;
 	}
-	
+
 	/*
 	 * Feeds the tree viewer's selection to the contentviewer
 	 */
@@ -402,7 +424,7 @@ public class AddFromHistoryDialog extends ResizableDialog {
 				fContentPane.setInput(selected);
 				fContentPane.setText(getEditionLabel(selected));
 				fContentPane.setImage(fTimeImage);
-				
+
 				if (fCurrentFileHistory != null)
 					fCurrentFileHistory.setSelected(selected.fFileState);
 			} else {
@@ -410,31 +432,31 @@ public class AddFromHistoryDialog extends ResizableDialog {
 			}
 		}
 	}
-	
+
 	protected String getEditionLabel(HistoryInput input) {
 		String format= Utilities.getString(fBundle, "historyEditionLabel", null);	//$NON-NLS-1$
 		if (format == null)
 			format= Utilities.getString(fBundle, "editionLabel");	//$NON-NLS-1$
 		if (format == null)
 			format= "x{0}";	//$NON-NLS-1$
-		
+
 		long modDate= input.getModificationDate();
 		String date= DateFormat.getDateTimeInstance().format(new Date(modDate));
-		
+
 		return MessageFormat.format(format, date);
 	}
-			
+
 	/* (non-Javadoc)
 	 * Method declared on Dialog.
 	 */
 	protected void createButtonsForButtonBar(Composite parent) {
-		String buttonLabel= Utilities.getString(fBundle, "buttonLabel", IDialogConstants.OK_LABEL); //$NON-NLS-1$
+        String buttonLabel = Utilities.getString(fBundle, "buttonLabel", IDialogConstants.get().OK_LABEL); //$NON-NLS-1$
 		// a 'Cancel' and a 'Add' button
 		fCommitButton= createButton(parent, IDialogConstants.OK_ID, buttonLabel, true);
 		fCommitButton.setEnabled(false);
-		createButton(parent, IDialogConstants.CANCEL_ID, IDialogConstants.CANCEL_LABEL, false);
+        createButton(parent, IDialogConstants.CANCEL_ID, IDialogConstants.get().CANCEL_LABEL, false);
 	}
-	
+
 	/*
 	 * Returns true if the pathname of f1 comes after f2
 	 */
@@ -444,7 +466,7 @@ public class AddFromHistoryDialog extends ResizableDialog {
 		int l1= ss1.length;
 		int l2= ss2.length;
 		int n= Math.max(l1, l2);
-		
+
 		for (int i= 0; i < n; i++) {
 			String s1= i < l1 ? ss1[i] : ""; //$NON-NLS-1$
 			String s2= i < l2 ? ss2[i] : ""; //$NON-NLS-1$
@@ -454,33 +476,33 @@ public class AddFromHistoryDialog extends ResizableDialog {
 		}
 		return false;
 	}
-	
-	private static void internalSort(IFile[] keys, int left, int right) { 
-	
+
+    private static void internalSort(IFile[] keys, int left, int right) {
+
 		int original_left= left;
 		int original_right= right;
-		
-		IFile mid= keys[(left + right) / 2]; 
-		do { 
+
+        IFile mid = keys[(left + right) / 2];
+        do {
 			while (greaterThan(keys[left], mid))
-				left++; 
-			
+                left++;
+
 			while (greaterThan(mid, keys[right]))
-				right--; 
-		
-			if (left <= right) { 
-				IFile tmp= keys[left]; 
-				keys[left]= keys[right]; 
-				keys[right]= tmp;			
-				left++; 
-				right--; 
-			} 
+                right--;
+
+            if (left <= right) {
+                IFile tmp = keys[left];
+                keys[left] = keys[right];
+                keys[right] = tmp;
+                left++;
+                right--;
+            }
 		} while (left <= right);
-		
+
 		if (original_left < right)
-			internalSort(keys, original_left, right); 
-		
+            internalSort(keys, original_left, right);
+
 		if (left < original_right)
-			internalSort(keys, left, original_right); 
+            internalSort(keys, left, original_right);
 	}
 }

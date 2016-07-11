@@ -10,24 +10,27 @@
  *******************************************************************************/
 package org.eclipse.compare.internal;
 
-import org.eclipse.jface.dialogs.*;
+import org.eclipse.jface.dialogs.IDialogConstants;
+import org.eclipse.jface.dialogs.MessageDialogWithToggle;
 import org.eclipse.jface.preference.RadioGroupFieldEditor;
 import org.eclipse.swt.graphics.Image;
-import org.eclipse.swt.widgets.*;
+import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.Control;
+import org.eclipse.swt.widgets.Shell;
 
 public class NavigationEndDialog extends MessageDialogWithToggle {
-	
+
 	private final String[][] labelsAndValues;
 	private RadioGroupFieldEditor editor;
 
 	public NavigationEndDialog(Shell parentShell, String dialogTitle,
 			Image dialogTitleImage, String dialogMessage, String[][] labelsAndValues) {
 		super(parentShell, dialogTitle, dialogTitleImage, dialogMessage,
-				QUESTION, new String[] { IDialogConstants.OK_LABEL , IDialogConstants.CANCEL_LABEL}, 0,
+                        QUESTION, new String[] {IDialogConstants.get().OK_LABEL, IDialogConstants.get().CANCEL_LABEL}, 0,
 				CompareMessages.NavigationEndDialog_0, false);
 		this.labelsAndValues = labelsAndValues;
 	}
-	
+
 	protected Control createCustomArea(Composite parent) {
 		editor = new RadioGroupFieldEditor(ICompareUIConstants.PREF_NAVIGATION_END_ACTION_LOCAL, CompareMessages.NavigationEndDialog_1, 1,
 				labelsAndValues,
@@ -37,7 +40,7 @@ public class NavigationEndDialog extends MessageDialogWithToggle {
 		editor.load();
 		return parent;
 	}
-	
+
 	protected void buttonPressed(int buttonId) {
 		if (buttonId == IDialogConstants.OK_ID) {
 			editor.store();
